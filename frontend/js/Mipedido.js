@@ -92,36 +92,62 @@ function renderTracker(estado) {
     }).join('');
 }
 
-// ── PEDIDO ACTIVO ──
-function renderPedidoActivo() {
-    const pedido = JSON.parse(localStorage.getItem('mamamia_pedido') || 'null');
+// ── RASTREADOR EN TIEMPO REAL CON RAILWAY ──
+async function rastrearPedidoEnVivo() {
+    const pedidoLocal = JSON.parse(localStorage.getItem('mamamia_pedido') || 'null');
 
-    // Si el pedido no pertenece al usuario actual, ocultarlo
-    if (pedido && pedido.userEmail && pedido.userEmail !== usuario.email) {
+    // Si no hay pedido o no es de este usuario, ocultamos el panel
+    if (!pedidoLocal || (pedidoLocal.userEmail && pedidoLocal.userEmail !== usuario.email)) {
         document.getElementById('noPedido').classList.remove('hidden');
         document.getElementById('pedidoWrap').classList.add('hidden');
         return;
     }
 
-    if (!pedido) {
-        document.getElementById('noPedido').classList.remove('hidden');
-        document.getElementById('pedidoWrap').classList.add('hidden');
-        return;
+    try {
+        // 1. Le preguntamos a Railway en vivo cómo va nuestro número de pedido
+        const response = await fetch(`https://pizzeria-mamamia-production-5cf6.up.railway.app/api/pedidos/numero/${pedidoLocal.num}`);
+
+        if (response.ok) {
+            const pedidoNube = await response.json();
+
+            // 2. Si el Admin cambió el estado en la nube, actualizamos el nuestro
+            if (pedidoLocal.estado !== pedidoNube.estado) {
+                pedidoLocal.estado = pedidoNube.estado;
+                localStorage.setItem('mamamia_pedido', JSON.stringify(pedidoLocal));
+
+                // Animaciones y notificaciones de avance
+                if (pedidoLocal.estado === 1) showToast('👨‍🍳 ¡Empezaron a preparar tu pizza!');
+                if (pedidoLocal.estado === 2) showToast('🔥 ¡Tu pizza entró al horno!');
+                if (pedidoLocal.estado === 3) showToast('🏪 ¡Tu pedido está listo para recoger!');
+                if (pedidoLocal.estado === 4) {
+                    agregarAlHistorial(pedidoLocal);
+                    renderHistorial();
+                }
+            }
+        }
+    } catch(e) {
+        console.log("Rastreador consultando a la nube...");
     }
 
+    // 3. Dibujamos la interfaz con el estado actual
+    dibujarPantallaPedido(pedidoLocal);
+}
+
+// Función auxiliar para pintar la pantalla (separada para mantener el código limpio)
+function dibujarPantallaPedido(pedido) {
     document.getElementById('noPedido').classList.add('hidden');
     document.getElementById('pedidoWrap').classList.remove('hidden');
 
     document.getElementById('pedidoNum').textContent = pedido.num;
-    document.getElementById('pedidoPago').textContent = `${pagoLabels[pedido.pago] || '💳'} Pagado`;
+    document.getElementById('pedidoPago').textContent = `${pagoLabels[pedido.metodoPago] || '💳'} Pagado`;
 
     const tiempos = ['', '20–30 min aprox.', '15–20 min aprox.', '¡Listo para recoger!', ''];
     document.getElementById('tiempoEstimado').textContent = tiempos[pedido.estado] || '';
 
+    // Actualiza la barra de progreso de los iconitos
     renderTracker(pedido.estado);
 
-    const btnCancelar = document.getElementById('btnCancelar');
-    btnCancelar.classList.toggle('hidden', pedido.estado > 0);
+    document.getElementById('btnCancelar').classList.toggle('hidden', pedido.estado > 0);
 
     document.getElementById('pedidoItems').innerHTML = (pedido.items || []).map(item => `
     <div class="pedido-item-row">
@@ -135,31 +161,14 @@ function renderPedidoActivo() {
 
     document.getElementById('pSubtotal').textContent = `S/ ${pedido.total}`;
     document.getElementById('pTotal').textContent = `S/ ${pedido.total}`;
-    document.getElementById('pedidoContacto').innerHTML = `📞 <strong>${pedido.tel}</strong>`;
-
-    const notasDiv = document.getElementById('pedidoNotas');
-    notasDiv.style.display = pedido.notas ? 'block' : 'none';
-    if (pedido.notas) notasDiv.innerHTML = `📝 ${pedido.notas}`;
-
-    // Guardar en historial
-    agregarAlHistorial(pedido);
-
-    // Avance automático de estado (demo)
-    if (pedido.estado < ESTADOS.length - 1) {
-        setTimeout(() => {
-            pedido.estado++;
-            localStorage.setItem('mamamia_pedido', JSON.stringify(pedido));
-            renderTracker(pedido.estado);
-            document.getElementById('tiempoEstimado').textContent = tiempos[pedido.estado] || '';
-            btnCancelar.classList.add('hidden');
-            if (pedido.estado === 3) showToast('🏪 ¡Tu pedido está listo para recoger!');
-            if (pedido.estado === 4) {
-                agregarAlHistorial(pedido);
-                renderHistorial();
-            }
-        }, 20000);
-    }
+    document.getElementById('pedidoContacto').innerHTML = `📞 <strong>${pedido.tel || 'No registrado'}</strong>`;
 }
+
+// 4. EL MOTOR DEL RASTREADOR: Consulta a Railway cada 5 segundos de forma invisible
+setInterval(rastrearPedidoEnVivo, 5000);
+
+// Lo ejecutamos la primera vez que carga la página
+rastrearPedidoEnVivo();
 
 // ── HISTORIAL ──
 function renderHistorial() {

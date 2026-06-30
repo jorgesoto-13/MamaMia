@@ -213,14 +213,33 @@ function closeEstadoModal() {
     document.getElementById('modalEstado').classList.add('hidden');
 }
 
-function cambiarEstado(pedidoIdx, nuevoEstado) {
-    pedidosFiltrados[pedidoIdx].estado = nuevoEstado;
-    const realIdx = PEDIDOS.findIndex(p => p.num === pedidosFiltrados[pedidoIdx].num);
-    if (realIdx !== -1) PEDIDOS[realIdx].estado = nuevoEstado;
-    closeEstadoModal();
-    renderPedidos();
-    renderDashboard();
-    showToast(`✅ Estado actualizado a: ${ESTADOS_LABELS[nuevoEstado].label}`);
+// ── ACTUALIZAR ESTADO EN LA NUBE DESDE EL ADMIN ──
+async function cambiarEstado(pedidoIdx, nuevoEstado) {
+    const pedido = pedidosFiltrados[pedidoIdx];
+    const idRealDB = pedido.idDB; // Usamos el ID real de MySQL
+
+    try {
+        // Disparamos el nuevo estado hacia Railway usando PUT
+        const response = await fetch(`https://pizzeria-mamamia-production-5cf6.up.railway.app/api/pedidos/${idRealDB}/estado`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ estado: nuevoEstado })
+        });
+
+        if (response.ok) {
+            closeEstadoModal();
+            // ¡Recargamos todo el panel para ver el cambio reflejado desde la nube!
+            await cargarDatosDesdeRailway();
+            renderDashboard();
+            renderPedidos();
+            showToast(`✅ Estado actualizado a: ${ESTADOS_LABELS[nuevoEstado].label}`);
+        } else {
+            showToast('❌ Error al actualizar en la nube', 'error');
+        }
+    } catch (error) {
+        console.error(error);
+        showToast('❌ Error de conexión con Railway', 'error');
+    }
 }
 
 // ── PRODUCTOS ──
