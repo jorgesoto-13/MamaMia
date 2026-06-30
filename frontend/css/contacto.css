@@ -1,0 +1,327 @@
+/* =============================================
+   contacto.css — Página Contacto
+   ============================================= 
+*/
+
+
+/* ── HERO ── */
+.con-hero {
+    position: relative;
+    height: 35vh;
+    min-height: 240px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    padding-bottom: 3rem;
+}
+
+.con-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('../img/bg_hero_contacto.png') center/cover no-repeat;
+}
+
+.con-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(20, 6, 0, 0.75) 0%, rgba(20, 6, 0, 0.35) 100%);
+}
+
+.con-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 8%;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.15s ease forwards;
+}
+
+.con-hero-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.5rem;
+}
+
+.con-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 900;
+    color: #fff;
+}
+
+/* ── CUERPO ── */
+.con-body {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    padding: 5rem 6%;
+    background: var(--cream);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Info */
+.con-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+    font-weight: 700;
+    margin: 0.5rem 0 2rem;
+    line-height: 1.2;
+}
+
+.con-title em {
+    color: var(--red);
+    font-style: italic;
+}
+
+.info-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+    margin-bottom: 2rem;
+}
+
+.info-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.info-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    background: #FDECEA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.info-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    color: var(--light-gray);
+    margin-bottom: 0.3rem;
+}
+
+.info-val {
+    font-size: 0.88rem;
+    color: var(--dark);
+    line-height: 1.6;
+}
+
+.mapa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: #fff;
+    border: 1.5px solid rgba(0, 0, 0, 0.1);
+    color: var(--dark);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: border-color 0.2s, color 0.2s;
+}
+
+.mapa-btn:hover {
+    border-color: var(--red);
+    color: var(--red);
+}
+
+.mapa-wrap {
+    margin-top: 1rem;
+}
+
+/* Formulario */
+.con-form-wrap {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2.2rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+}
+
+.form-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+}
+
+.field label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--gray);
+    text-transform: uppercase;
+}
+
+.req {
+    color: var(--red);
+}
+
+.char-count {
+    font-size: 0.7rem;
+    color: var(--light-gray);
+    font-weight: 400;
+    letter-spacing: 0;
+}
+
+.field input,
+.field select,
+.field textarea {
+    background: #F5F0EB;
+    border: 1.5px solid transparent;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.88rem;
+    font-family: 'Inter', sans-serif;
+    color: var(--dark);
+    outline: none;
+    width: 100%;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    border-color: var(--red);
+    box-shadow: 0 0 0 3px rgba(200, 55, 45, 0.1);
+}
+
+.field textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.field select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B6565' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+.field-error {
+    font-size: 0.75rem;
+    color: var(--red);
+    min-height: 1rem;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.2s, transform 0.2s;
+}
+
+.field-error.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.btn-enviar {
+    width: 100%;
+    background: linear-gradient(135deg, var(--red), #E8522A);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    box-shadow: 0 6px 20px rgba(200, 55, 45, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-enviar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(200, 55, 45, 0.45);
+}
+
+.btn-enviar:active {
+    transform: scale(0.98);
+}
+
+.btn-enviar.loading {
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+/* ── TOAST ── */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--dark);
+    color: #fff;
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    z-index: 600;
+    pointer-events: none;
+    opacity: 0;
+    transition: transform 0.4s cubic-bezier(.22, .68, 0, 1.2), opacity 0.3s;
+    white-space: nowrap;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+/* ── REVEAL ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay1 {
+    transition-delay: 0.12s;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .con-body {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding: 3rem 5%;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Carrito — Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/carrito.css"/>
+</head>
+<body>
+
+  
+
+  <main class="carrito-main">
+
+    <!-- Columna izquierda: items -->
+    <div class="carrito-left">
+      <nav class="breadcrumb">
+        <a href="index.html">Inicio</a>
+        <span>›</span>
+        <span>Mi Carrito</span>
+      </nav>
+
+      <div class="carrito-header">
+        <h1>Mi Carrito</h1>
+        <p class="carrito-count" id="carritoCount">0 productos en tu pedido</p>
+      </div>
+
+      <!-- Items -->
+      <div class="items-list" id="itemsList">
+        <!-- Renderizado por JS -->
+      </div>
+
+      <!-- Carrito vacío -->
+      <div class="empty-cart hidden" id="emptyCart">
+        <div class="empty-icon">🛒</div>
+        <h3>Tu carrito está vacío</h3>
+        <p>Agrega tus pizzas favoritas desde el menú</p>
+        <a href="menu.html" class="btn-red">Ver el Menú</a>
+      </div>
+
+      <!-- Acciones -->
+      <div class="carrito-actions" id="carritoActions">
+        <a href="menu.html" class="add-more">+ Añadir más productos</a>
+        <button class="vaciar-btn" onclick="vaciarCarrito()">Vaciar carrito</button>
+      </div>
+    </div>
+
+    <!-- Columna derecha: resumen -->
+    <div class="carrito-right" id="carritoRight">
+      <div class="resumen-card">
+        <div class="resumen-header">
+          <h2>Confirmar Pedido</h2>
+          <p class="resumen-user">👤 Cliente</p>
+        </div>
+
+        <!-- Lista resumen -->
+        <div class="resumen-items" id="resumenItems"></div>
+
+        <div class="resumen-linea">
+          <span>Subtotal</span>
+          <span id="resSubtotal">S/ 0.00</span>
+        </div>
+        <div class="resumen-linea">
+          <span>Modalidad</span>
+          <span class="modalidad-badge">🏪 Recojo en local o delivery</span>
+        </div>
+        <div class="resumen-linea total">
+          <span>Total</span>
+          <span id="resTotal">S/ 0.00</span>
+        </div>
+
+        <!-- Modalidad -->
+        <div class="modalidad-section" id="modalidadSection">
+          <h4>Modalidad</h4>
+          <div class="modalidad-grid">
+            <label class="modalidad-card active-modal" id="modalRecojo">
+              <input type="radio" name="modalidad" value="recojo" checked onchange="onModalidad()"/>
+              <span class="modalidad-icon">🏪</span>
+              <div>
+                <p class="modalidad-name">Recojo en local</p>
+                <p class="modalidad-desc">Listo en 20–30 min. Jr. Grau 245, Chosica</p>
+              </div>
+            </label>
+            <label class="modalidad-card" id="modalDelivery">
+              <input type="radio" name="modalidad" value="delivery" onchange="onModalidad()"/>
+              <span class="modalidad-icon">🛵</span>
+              <div>
+                <p class="modalidad-name">Delivery</p>
+                <p class="modalidad-desc">Solo con pago con tarjeta. 30–45 min aprox.</p>
+              </div>
+            </label>
+          </div>
+          <!-- Dirección (solo delivery) -->
+          <div class="direccion-wrap hidden" id="direccionWrap">
+            <input type="text" placeholder="📍 Dirección de entrega *" id="direccion"/>
+            <span class="field-error" id="dirErr"></span>
+          </div>
+        </div>
+
+        <!-- Método de pago -->
+        <div class="pago-section">
+          <h4>Método de pago</h4>
+          <p class="pago-nota">💡 Solo aceptamos pago anticipado. Esto garantiza que tu pizza se prepare solo cuando el pago es confirmado.</p>
+          <div class="pago-grid">
+            <label class="pago-card">
+              <input type="radio" name="pago" value="yape" checked onchange="selectPago(this)"/>
+              <span class="pago-icon">📱</span>
+              <span class="pago-name">Yape</span>
+            </label>
+            <label class="pago-card">
+              <input type="radio" name="pago" value="plin" onchange="selectPago(this)"/>
+              <span class="pago-icon">💜</span>
+              <span class="pago-name">Plin</span>
+            </label>
+            <label class="pago-card">
+              <input type="radio" name="pago" value="tarjeta" onchange="selectPago(this)"/>
+              <span class="pago-icon">💳</span>
+              <span class="pago-name">Tarjeta</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Datos de contacto -->
+        <div class="contacto-section">
+          <h4>Datos de contacto</h4>
+          <div class="field">
+            <input type="tel" placeholder="📞 Teléfono de contacto *" id="telefono"/>
+            <span class="field-error" id="telErr"></span>
+          </div>
+          <div class="field">
+            <textarea placeholder="Notas adicionales (opcional)" id="notas" rows="2"></textarea>
+          </div>
+        </div>
+
+        <button class="btn-confirmar" id="btnConfirmar" onclick="confirmarPedido()">
+          ✓ Confirmar Pedido · <span id="btnTotal">S/ 0.00</span>
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/carrito.js"></script>
+</body>
+</html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Acceso — Mamma Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/login.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'" aria-label="Carrito">
+      <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin active-nav">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- FONDO DECORATIVO -->
+  <div class="login-bg">
+    <div class="bg-blob blob1"></div>
+    <div class="bg-blob blob2"></div>
+    <div class="bg-blob blob3"></div>
+  </div>
+
+  <!-- CONTENEDOR PRINCIPAL -->
+  <main class="login-main">
+
+    <!-- CARD CLIENTE -->
+    <div class="login-card" id="clientCard">
+
+      <!-- Header dinámico -->
+      <div class="card-header">
+        <div class="card-icon">🍕</div>
+        <h1 class="card-title" id="cardTitle">Bienvenido de vuelta</h1>
+        <p class="card-sub" id="cardSub">Accede para pedir tus pizzas favoritas</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="tabs">
+        <button class="tab active" id="tabLogin" onclick="switchTab('login')">Iniciar sesión</button>
+        <button class="tab" id="tabRegister" onclick="switchTab('register')">Registrarse</button>
+      </div>
+
+      <!-- FORM LOGIN -->
+      <div class="tab-content" id="formLogin">
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com" id="loginEmail" autocomplete="email"/>
+          <span class="field-error" id="loginEmailErr"></span>
+        </div>
+        <div class="field">
+          <label>Contraseña</label>
+          <div class="input-wrap">
+            <input type="password" placeholder="••••••" id="loginPass" autocomplete="current-password"/>
+            <button class="eye-btn" onclick="togglePass('loginPass', this)" type="button">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <span class="field-error" id="loginPassErr"></span>
+        </div>
+        <a href="#" class="forgot-link">¿Olvidaste tu contraseña?</a>
+        <button class="btn-submit" onclick="handleLogin()">Iniciar sesión</button>
+        <p class="demo-hint">Prueba con: <strong>admin@mamamia.com</strong> para acceso admin</p>
+      </div>
+
+      <!-- FORM REGISTRO -->
+      <div class="tab-content hidden" id="formRegister">
+        <div class="field">
+          <label>Nombre completo</label>
+          <input type="text" placeholder="Tu nombre" id="regName" autocomplete="name"/>
+          <span class="field-error" id="regNameErr"></span>
+        </div>
+        <div class="field">
+          <label>Email</label>
+          <input type="email" placeholder="tu@email.com" id="regEmail" autocomplete="email"/>
+          <span class="field-error" id="regEmailErr"></span>
+        </div>
+        <div class="field">
+          <label>Contraseña</label>
+          <div class="input-wrap">
+            <input type="password" placeholder="Mínimo 6 caracteres" id="regPass"/>
+            <button class="eye-btn" onclick="togglePass('regPass', this)" type="button">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <span class="field-error" id="regPassErr"></span>
+        </div>
+        <div class="field">
+          <label>Confirmar contraseña</label>
+          <div class="input-wrap">
+            <input type="password" placeholder="Repite tu contraseña" id="regPass2"/>
+            <button class="eye-btn" onclick="togglePass('regPass2', this)" type="button">
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            </button>
+          </div>
+          <span class="field-error" id="regPass2Err"></span>
+        </div>
+        <button class="btn-submit" onclick="handleRegister()">Crear cuenta</button>
+      </div>
+
+      <!-- Separador admin -->
+      <div class="admin-sep">
+        <span>¿Eres administrador?</span>
+        <button class="admin-link" onclick="switchToAdmin()">Acceder al panel →</button>
+      </div>
+
+    </div>
+
+    <!-- CARD ADMIN -->
+    <div class="login-card admin-card hidden" id="adminCard">
+      <div class="card-header">
+        <div class="card-icon admin-icon">🛡️</div>
+        <h1 class="card-title" style="color:#fff">Panel Administrativo</h1>
+        <p class="card-sub" style="color:rgba(255,255,255,0.55)">Acceso exclusivo para administradores</p>
+      </div>
+
+      <div class="field">
+        <label style="color:rgba(255,255,255,0.7)">Email de administrador</label>
+        <input type="email" placeholder="admin@mamamia.com" id="adminEmail" autocomplete="email"/>
+        <span class="field-error" id="adminEmailErr"></span>
+      </div>
+      <div class="field">
+        <label style="color:rgba(255,255,255,0.7)">Contraseña</label>
+        <div class="input-wrap">
+          <input type="password" placeholder="••••••" id="adminPass" autocomplete="current-password"/>
+          <button class="eye-btn" onclick="togglePass('adminPass', this)" type="button">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+        <span class="field-error" id="adminPassErr"></span>
+      </div>
+
+      <button class="btn-submit" onclick="handleAdmin()">Acceder al panel</button>
+      <p class="demo-hint" style="color:rgba(255,255,255,0.35)">Demo: <strong style="color:rgba(255,255,255,0.55)">admin@mamamia.com</strong> / cualquier contraseña</p>
+
+      <button class="back-client" onclick="switchToClient()">← Volver al sitio web</button>
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/login.js"></script>
+</body>
+</html>

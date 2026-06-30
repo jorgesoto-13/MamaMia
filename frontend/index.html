@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/index.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html" class="active">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'" aria-label="Carrito">
+      <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg" id="heroBg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-tag">🍕 Auténtica pizza napolitana desde 1987</div>
+      <h1 class="hero-title">Sabor italiano,</h1>
+      <span class="hero-title-gold">Directo a tu mesa</span>
+      <p class="hero-sub">Masa fermentada 48 horas, ingredientes seleccionados y el fuego de nuestro horno de leña. Así nace cada pizza de Mama Mia.</p>
+      <div class="hero-btns">
+        <a href="menu.html" class="btn-red">Ver Menú completo →</a>
+        <a href="nosotros.html" class="btn-outline-white">Nuestra historia</a>
+      </div>
+    </div>
+    <div class="hero-scroll">Descubre más</div>
+  </section>
+
+  <!-- PIZZAS DESTACADAS -->
+  <section class="pizzas" id="menu">
+    <div class="pizzas-header">
+      <div class="section-label">NUESTRAS ESTRELLAS</div>
+      <h2 class="section-title">Pizzas destacadas</h2>
+      <p class="section-sub" style="margin-top:0.8rem;">Las favoritas de nuestros clientes, elaboradas con recetas tradicionales napolitanas y los mejores ingredientes de temporada.</p>
+    </div>
+    <div class="pizzas-grid">
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="img/pizza_margherita.png" alt="Margherita Classica" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Margherita Classica</h3>
+          <p>La reina de las pizzas. Salsa de tomate San Marzano, mozzarella fior di latte y albahaca fresca sobre masa napolitana.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 28.90</div></div>
+            <a href="menu.html" class="btn-ver">Ver más →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Diávola Ardiente" loading="lazy"/>
+          <span class="pizza-cat" style="background:#C8372D">Especiales</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Diávola Ardiente</h3>
+          <p>Para los amantes del picante. Pepperoni premium, jalapeños frescos y salsa arrabiata sobre base crujiente de horno de leña.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 34.90</div></div>
+            <a href="menu.html" class="btn-ver">Ver más →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=600&q=80" alt="Verdure di Stagione" loading="lazy"/>
+          <span class="pizza-cat" style="background:#4A9E6E">Vegetarianas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Verdure di Stagione</h3>
+          <p>Un jardín sobre masa. Calabacín, pimientos asados, berenjenas, tomates cherry y rúcula fresca con queso de cabra.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 30.90</div></div>
+            <a href="menu.html" class="btn-ver">Ver más →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="pizzas-center">
+      <a href="menu.html" class="btn-outline-red">Ver toda la carta →</a>
+    </div>
+  </section>
+
+  <!-- POR QUÉ ELEGIRNOS -->
+  <section class="why" id="nosotros">
+    <div class="why-header">
+      <div class="section-label">NUESTRA PROMESA</div>
+      <h2 class="section-title">¿Por qué elegirnos?</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon green">🌿</div>
+        <h3>Ingredientes frescos</h3>
+        <p>Seleccionamos los mejores ingredientes locales e importados de Italia cada mañana.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon redlight">🔥</div>
+        <h3>Horno de leña</h3>
+        <p>Nuestro horno artesanal alcanza los 450°C para la pizza napolitana perfecta.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon orange">⚡</div>
+        <h3>Preparación rápida</h3>
+        <p>Tu pizza está lista para disfrutar caliente y crujiente en menos de 30 minutos.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-banner" id="contacto">
+    <div class="cta-overlay"></div>
+    <div class="cta-content">
+      <h2>Haz tu pedido ahora</h2>
+      <p>Preparación en 30 minutos. Puedes recoger en local.</p>
+      <a href="menu.html" class="btn-red">Pedir ahora →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/index.js"></script>
+</body>
+</html>

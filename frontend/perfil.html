@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Perfil — Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/perfil.css"/>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'">
+        <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <main class="perfil-main">
+
+    <!-- Sidebar de perfil -->
+    <aside class="perfil-sidebar">
+      <div class="perfil-avatar-wrap">
+        <div class="perfil-avatar" id="perfilAvatar">?</div>
+        <button class="cambiar-foto-btn" onclick="document.getElementById('fotoInput').click()">📷 Cambiar foto</button>
+        <input type="file" id="fotoInput" accept="image/*" style="display:none" onchange="cambiarFoto(this)"/>
+      </div>
+      <p class="perfil-nombre" id="perfilNombre">—</p>
+      <p class="perfil-email" id="perfilEmail">—</p>
+      <nav class="perfil-nav">
+        <button class="perfil-nav-item active" onclick="showTab('datos')">👤 Mis datos</button>
+        <button class="perfil-nav-item" onclick="showTab('direcciones')">📍 Direcciones</button>
+        <button class="perfil-nav-item" onclick="showTab('seguridad')">🔐 Seguridad</button>
+        <a href="mipedido.html" class="perfil-nav-item">📦 Mis pedidos</a>
+        <a href="ajustes.html" class="perfil-nav-item">⚙️ Ajustes</a>
+      </nav>
+    </aside>
+
+    <!-- Contenido -->
+    <div class="perfil-content">
+
+      <!-- Tab: Mis datos -->
+      <div class="perfil-tab active" id="tab-datos">
+        <div class="perfil-card">
+          <div class="perfil-card-header">
+            <h2>Mis datos personales</h2>
+            <p>Actualiza tu información de perfil</p>
+          </div>
+          <div class="perfil-form">
+            <div class="form-row-2">
+              <div class="field">
+                <label>Nombre</label>
+                <input type="text" id="fNombre" placeholder="Tu nombre"/>
+              </div>
+              <div class="field">
+                <label>Apellido</label>
+                <input type="text" id="fApellido" placeholder="Tu apellido"/>
+              </div>
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input type="email" id="fEmail" placeholder="tu@email.com"/>
+            </div>
+            <div class="field">
+              <label>Teléfono</label>
+              <input type="tel" id="fTelefono" placeholder="+51 987 000 000"/>
+            </div>
+            <div class="field">
+              <label>Fecha de nacimiento</label>
+              <input type="date" id="fNacimiento"/>
+            </div>
+            <button class="btn-guardar" onclick="guardarDatos()">💾 Guardar cambios</button>
+          </div>
+        </div>
+
+        <!-- Stats rápidas -->
+        <div class="perfil-stats">
+          <div class="perfil-stat">
+            <span class="pstat-num" id="statTotalPedidos">0</span>
+            <span class="pstat-label">Pedidos realizados</span>
+          </div>
+          <div class="perfil-stat">
+            <span class="pstat-num" id="statTotalGastado">S/ 0</span>
+            <span class="pstat-label">Total gastado</span>
+          </div>
+          <div class="perfil-stat">
+            <span class="pstat-num" id="statFavorita">—</span>
+            <span class="pstat-label">Pizza favorita</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Direcciones -->
+      <div class="perfil-tab hidden" id="tab-direcciones">
+        <div class="perfil-card">
+          <div class="perfil-card-header">
+            <h2>Mis direcciones</h2>
+            <p>Guarda direcciones para pedidos más rápidos</p>
+          </div>
+          <div id="direccionesList" class="direcciones-list"></div>
+          <button class="btn-add-dir" onclick="agregarDireccion()">+ Agregar dirección</button>
+        </div>
+      </div>
+
+      <!-- Tab: Seguridad -->
+      <div class="perfil-tab hidden" id="tab-seguridad">
+        <div class="perfil-card">
+          <div class="perfil-card-header">
+            <h2>Seguridad de la cuenta</h2>
+            <p>Cambia tu contraseña regularmente para mantener tu cuenta segura</p>
+          </div>
+          <div class="perfil-form">
+            <div class="field">
+              <label>Contraseña actual</label>
+              <input type="password" id="passActual" placeholder="••••••"/>
+            </div>
+            <div class="field">
+              <label>Nueva contraseña</label>
+              <input type="password" id="passNueva" placeholder="Mínimo 6 caracteres"/>
+            </div>
+            <div class="field">
+              <label>Confirmar nueva contraseña</label>
+              <input type="password" id="passConfirm" placeholder="Repite la nueva contraseña"/>
+              <span class="field-error" id="passErr"></span>
+            </div>
+            <button class="btn-guardar" onclick="cambiarPassword()">🔐 Cambiar contraseña</button>
+          </div>
+
+          <div class="sesion-info">
+            <h4>Sesión activa</h4>
+            <div class="sesion-item">
+              <span>💻 Este dispositivo</span>
+              <span class="sesion-badge">Activa ahora</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/perfil.js"></script>
+</body>
+</html>
