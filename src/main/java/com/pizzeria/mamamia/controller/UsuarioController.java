@@ -37,4 +37,10 @@ public class UsuarioController {
         Usuario usuarioGuardado = usuarioRepository.save(nuevoUsuario);
         return ResponseEntity.ok(usuarioGuardado);
     }
+
+    // --- ESTA ES LA PUERTA PARA VER DATOS EN LA URL ---
+    @GetMapping
+    public ResponseEntity<java.util.List<Usuario>> verTodosLosUsuarios() {
+        return ResponseEntity.ok(usuarioRepository.findAll());
+    }
 }
