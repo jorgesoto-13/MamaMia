@@ -115,13 +115,18 @@ function simularPago() {
     overlay.classList.remove('hidden');
 
     const numAleatorio = 'MM-' + Math.floor(100000 + Math.random() * 900000);
-    const telInput = document.getElementById('telefono') ? document.getElementById('telefono').value : "999999999";
-    const dirInput = document.getElementById('direccion') ? document.getElementById('direccion').value : "Recojo en local";
 
-    // Preparamos los datos para Spring Boot
+    // Rescatamos el teléfono y dirección del pedido guardado previamente, o usamos valores por defecto
+    const telInput = document.getElementById('telefono') ? document.getElementById('telefono').value : (pedidoPendiente.tel || "999999999");
+    const dirInput = document.getElementById('direccion') ? document.getElementById('direccion').value : (pedidoPendiente.direccion || "Recojo en local");
+
+    // ¡NUEVO!: Obtenemos al usuario que inició sesión desde la memoria del navegador
+    const usuarioLocal = JSON.parse(localStorage.getItem('mamamia_usuario')) || { nombre: "Cliente Anónimo" };
+
+    // Preparamos los datos reales para Spring Boot
     const pedidoDB = {
         numPedido: numAleatorio,
-        clienteNombre: "Cliente General",
+        clienteNombre: usuarioLocal.nombre, // <--- Aquí se envía el nombre real a Railway
         telefono: telInput,
         direccion: dirInput,
         modalidad: pedidoPendiente.modalidad || "recojo",
@@ -130,6 +135,7 @@ function simularPago() {
         estado: 0
     };
 
+    // Enviamos el pedido a la base de datos
     fetch('https://pizzeria-mamamia-production-5cf6.up.railway.app/api/pedidos', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -140,6 +146,7 @@ function simularPago() {
         return response.json();
     })
     .then(data => {
+        // Simulamos un tiempo de procesamiento para el pago
         setTimeout(() => {
             overlay.classList.add('hidden');
             const pedidoLocal = { ...pedidoPendiente };
@@ -148,11 +155,15 @@ function simularPago() {
             pedidoLocal.metodoPago = metodoActual;
             pedidoLocal.creado = new Date().toISOString();
             pedidoLocal.num = numAleatorio;
+            pedidoLocal.userEmail = usuarioLocal.email; // Asociar también el email al pedido local
 
+            // Guardamos el pedido definitivo en el navegador del cliente
             localStorage.setItem('mamamia_pedido', JSON.stringify(pedidoLocal));
             localStorage.removeItem('mamamia_pedido_pendiente');
             localStorage.removeItem('mamamia_cart');
             window.dispatchEvent(new CustomEvent('cartUpdated'));
+
+            // Redirigir al historial de pedidos
             location.href = 'Mipedido.html';
         }, 1500);
     })
