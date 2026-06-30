@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Menú — Mamma Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/menu.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html" class="active">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'" aria-label="Carrito">
+        <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO MENÚ -->
+  <section class="menu-hero">
+    <h1 class="menu-hero-title">Nuestra Carta</h1>
+    <p class="menu-hero-sub">Todas nuestras pizzas se elaboran con masa fermentada 48 horas y horneadas en leña a 450°C.</p>
+  </section>
+
+  <!-- FILTROS -->
+  <div class="filters-wrap">
+    <div class="filters" id="filters">
+      <button class="filter-btn active" data-cat="todas">Todas</button>
+      <button class="filter-btn" data-cat="clasicas">Clásicas</button>
+      <button class="filter-btn" data-cat="especiales">Especiales</button>
+      <button class="filter-btn" data-cat="vegetarianas">Vegetarianas</button>
+      <button class="filter-btn" data-cat="gourmet">Gourmet</button>
+    </div>
+  </div>
+
+  <!-- GRID PIZZAS -->
+  <section class="menu-section">
+    <div class="menu-grid" id="menuGrid">
+
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="img/pizza_margherita.png" alt="Margherita Classica" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Margherita Classica</h3>
+          <p>La reina de las pizzas. Salsa de tomate San Marzano, mozzarella fior di latte y albahaca fresca sobre masa...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 28.90</div></div>
+            <button class="btn-ver" onclick="openDetail('margherita')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="especiales">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80" alt="Diávola Ardiente" loading="lazy"/>
+          <span class="pizza-cat" style="background:#C8372D">Especiales</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Diávola Ardiente</h3>
+          <p>Para los amantes del picante. Pepperoni premium, jalapeños frescos y salsa arrabiata sobre una base crujiente...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 34.90</div></div>
+            <button class="btn-ver" onclick="openDetail('diavola')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="vegetarianas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=80" alt="Verdure di Stagione" loading="lazy"/>
+          <span class="pizza-cat" style="background:#4A9E6E">Vegetarianas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Verdure di Stagione</h3>
+          <p>Un jardín sobre masa. Calabacín, pimientos asados, berenjenas, tomates cherry y rúcula fresca con queso...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 30.90</div></div>
+            <button class="btn-ver" onclick="openDetail('verdure')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="gourmet">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1573821663912-569905455b1c?w=800&q=80" alt="Pizza Pesto y Pollo" loading="lazy"/>
+          <span class="pizza-cat" style="background:#8B5CF6">Gourmet</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Pizza Pesto y Pollo</h3>
+          <p>Base de salsa pesto genovés artesanal, mozzarella, jugosos trozos de pollo a la parrilla y tomates cherry...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 42.90</div></div>
+            <button class="btn-ver" onclick="openDetail('pesto_pollo')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80" alt="Quattro Stagioni" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Quattro Stagioni</h3>
+          <p>Las cuatro estaciones en una pizza. Champiñones, aceitunas negras, alcachofas y jamón cocido...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 38.90</div></div>
+            <button class="btn-ver" onclick="openDetail('quattro')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="gourmet">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=800&q=80" alt="Tartufo Nero" loading="lazy"/>
+          <span class="pizza-cat" style="background:#8B5CF6">Gourmet</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Tartufo Nero</h3>
+          <p>La pizza más exclusiva. Base de crema de trufa negra, mozzarella de búfala, champiñones porcini y virutas...</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 46.90</div></div>
+            <button class="btn-ver" onclick="openDetail('tartufo')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- NUEVAS PIZZAS -->
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=800&q=80" alt="Americana Clásica" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Americana Clásica</h3>
+          <p>La favorita de los niños. Queso mozzarella fundido y abundante jamón inglés sobre nuestra base tradicional.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 25.90</div></div>
+            <button class="btn-ver" onclick="openDetail('americana')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?w=800&q=80" alt="Hawaiana" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Hawaiana</h3>
+          <p>Un clásico tropical. Jamón inglés y trozos de piña fresca asada para un toque dulce perfecto.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 28.90</div></div>
+            <button class="btn-ver" onclick="openDetail('hawaiana')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="especiales">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=800&q=80" alt="Carnívora" loading="lazy"/>
+          <span class="pizza-cat" style="background:#C8372D">Especiales</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Carnívora</h3>
+          <p>Para los amantes de la carne. Pepperoni, jamón, salchicha italiana, tocino y carne molida.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 38.90</div></div>
+            <button class="btn-ver" onclick="openDetail('carnivora')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="especiales">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=800&q=80" alt="Suprema" loading="lazy"/>
+          <span class="pizza-cat" style="background:#C8372D">Especiales</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Suprema</h3>
+          <p>La combinación perfecta. Pepperoni, salchicha, champiñones, cebolla roja, pimientos y aceitunas negras.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 39.90</div></div>
+            <button class="btn-ver" onclick="openDetail('suprema')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=800&q=80" alt="Auténtica Napolitana" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Auténtica Napolitana</h3>
+          <p>Simple y deliciosa. Tomate en rodajas frescas, abundante ajo, orégano y un toque de anchoas.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 26.90</div></div>
+            <button class="btn-ver" onclick="openDetail('napolitana')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="gourmet">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1552539618-7eec9b4d1796?w=800&q=80" alt="Siciliana" loading="lazy"/>
+          <span class="pizza-cat" style="background:#8B5CF6">Gourmet</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Siciliana</h3>
+          <p>Sabor del sur de Italia. Alcaparras, anchoas, aceitunas negras y un toque de ají sobre base roja.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 35.90</div></div>
+            <button class="btn-ver" onclick="openDetail('siciliana')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="clasicas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=800&q=80" alt="Pepperoni Lover" loading="lazy"/>
+          <span class="pizza-cat" style="background:#D4A843">Clásicas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Pepperoni Lover</h3>
+          <p>Doble porción de pepperoni premium americano sobre una capa generosa de queso mozzarella.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 29.90</div></div>
+            <button class="btn-ver" onclick="openDetail('pepperoni')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="especiales">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1544982503-9f984c14501a?w=800&q=80" alt="Alemana" loading="lazy"/>
+          <span class="pizza-cat" style="background:#C8372D">Especiales</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Alemana</h3>
+          <p>Un sabor robusto. Salchicha blanca tipo huachana, tocino crujiente y cebolla blanca.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 36.90</div></div>
+            <button class="btn-ver" onclick="openDetail('alemana')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="vegetarianas">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1588315029754-2dd089d39a1a?w=800&q=80" alt="Continental" loading="lazy"/>
+          <span class="pizza-cat" style="background:#4A9E6E">Vegetarianas</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Continental</h3>
+          <p>Fresca y variada. Champiñones, cebolla, pimiento verde, aceitunas y trozos de tomate fresco.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 32.90</div></div>
+            <button class="btn-ver" onclick="openDetail('continental')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="pizza-card" data-cat="gourmet">
+        <div class="pizza-img-wrap">
+          <img src="https://images.unsplash.com/photo-1573821663912-569905455b1c?w=800&q=80" alt="Cuatro Quesos" loading="lazy"/>
+          <span class="pizza-cat" style="background:#8B5CF6">Gourmet</span>
+        </div>
+        <div class="pizza-body">
+          <h3>Cuatro Quesos</h3>
+          <p>Una explosión láctea. Mozzarella, Gorgonzola, Parmesano y queso Provolone derretidos a la perfección.</p>
+          <div class="pizza-foot">
+            <div><div class="pizza-from">Desde</div><div class="pizza-price">S/ 40.90</div></div>
+            <button class="btn-ver" onclick="openDetail('cuatroquesos')">Ver más →</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- MODAL DETALLE PIZZA -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeDetail(event)">
+    <div class="modal" id="modal">
+      <button class="modal-close" onclick="closeDetailBtn()">✕</button>
+
+      <div class="modal-body">
+        <!-- Columna izquierda: imagen -->
+        <div class="modal-img-col">
+          <div class="modal-img-wrap">
+            <img id="modalImg" src="" alt=""/>
+            <span class="pizza-cat" id="modalCat" style="position:absolute;top:14px;left:14px"></span>
+          </div>
+        </div>
+
+        <!-- Columna derecha: info -->
+        <div class="modal-info-col">
+          <a href="menu.html" class="modal-back">← Volver</a>
+          <h2 id="modalName"></h2>
+          <p id="modalDesc" class="modal-desc"></p>
+
+          <!-- Ingredientes base -->
+          <div class="modal-section">
+            <h4>Ingredientes</h4>
+            <div class="tag-list" id="modalIngredients"></div>
+          </div>
+
+          <!-- Tamaño -->
+          <div class="modal-section">
+            <h4>Tamaño</h4>
+            <div class="size-grid" id="sizeGrid">
+              <div class="size-card" data-size="personal" data-price="0" onclick="selectSize(this)">
+                <div class="size-name">Personal</div>
+                <div class="size-cm">25 cm</div>
+                <div class="size-price" id="pricePersonal"></div>
+              </div>
+              <div class="size-card active" data-size="mediana" data-price="5" onclick="selectSize(this)">
+                <div class="size-name">Mediana</div>
+                <div class="size-cm">33 cm</div>
+                <div class="size-price" id="priceMediana"></div>
+              </div>
+              <div class="size-card" data-size="familiar" data-price="11" onclick="selectSize(this)">
+                <div class="size-name">Familiar</div>
+                <div class="size-cm">42 cm</div>
+                <div class="size-price" id="priceFamiliar"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Ingredientes extras -->
+          <div class="modal-section">
+            <h4>Ingredientes extras <span class="extras-sub">(opcional)</span></h4>
+            <div class="extras-grid" id="extrasGrid">
+              <label class="extra-item"><input type="checkbox" data-price="3" onchange="updateTotal()"/><span class="extra-icon">🧀</span><span class="extra-name">Extra Mozzarella</span><span class="extra-price">+S/ 3</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="4" onchange="updateTotal()"/><span class="extra-icon">🥩</span><span class="extra-name">Pepperoni</span><span class="extra-price">+S/ 4</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="3" onchange="updateTotal()"/><span class="extra-icon">🍄</span><span class="extra-name">Champiñones</span><span class="extra-price">+S/ 3</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="4" onchange="updateTotal()"/><span class="extra-icon">🫒</span><span class="extra-name">Aceitunas</span><span class="extra-price">+S/ 4</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="5" onchange="updateTotal()"/><span class="extra-icon">🥓</span><span class="extra-name">Jamón Crudo</span><span class="extra-price">+S/ 5</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="3" onchange="updateTotal()"/><span class="extra-icon">🌶️</span><span class="extra-name">Jalapeños</span><span class="extra-price">+S/ 3</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="4" onchange="updateTotal()"/><span class="extra-icon">🫑</span><span class="extra-name">Pimientos</span><span class="extra-price">+S/ 4</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="5" onchange="updateTotal()"/><span class="extra-icon">🦐</span><span class="extra-name">Camarones</span><span class="extra-price">+S/ 5</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="5" onchange="updateTotal()"/><span class="extra-icon">🥓</span><span class="extra-name">Tocino Ahumado</span><span class="extra-price">+S/ 5</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="3" onchange="updateTotal()"/><span class="extra-icon">🧅</span><span class="extra-name">Cebolla Caramel.</span><span class="extra-price">+S/ 3</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="4" onchange="updateTotal()"/><span class="extra-icon">🧀</span><span class="extra-name">Queso Gorgonzola</span><span class="extra-price">+S/ 4</span></label>
+              <label class="extra-item"><input type="checkbox" data-price="5" onchange="updateTotal()"/><span class="extra-icon">🍗</span><span class="extra-name">Pollo Deshil.</span><span class="extra-price">+S/ 5</span></label>
+            </div>
+          </div>
+
+          <!-- Bebidas -->
+          <div class="modal-section">
+            <h4>Agregar bebida <span class="extras-sub">(opcional)</span></h4>
+            <div class="drinks-grid" id="drinksGrid">
+              <label class="drink-item"><input type="radio" name="drink" value="0" onchange="updateTotal()" checked/><span class="drink-icon">🚫</span><span class="drink-name">Sin bebida</span><span class="drink-price"></span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="5" onchange="updateTotal()"/><span class="drink-icon">🥤</span><span class="drink-name">Coca-Cola 500ml</span><span class="drink-price">+S/ 5</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="5" onchange="updateTotal()"/><span class="drink-icon">🥤</span><span class="drink-name">Sprite 500ml</span><span class="drink-price">+S/ 5</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="5" onchange="updateTotal()"/><span class="drink-icon">🥤</span><span class="drink-name">Fanta Naranja</span><span class="drink-price">+S/ 5</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="4" onchange="updateTotal()"/><span class="drink-icon">💧</span><span class="drink-name">Agua sin gas</span><span class="drink-price">+S/ 4</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="4" onchange="updateTotal()"/><span class="drink-icon">💧</span><span class="drink-name">Agua con gas</span><span class="drink-price">+S/ 4</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="12" onchange="updateTotal()"/><span class="drink-icon">🍺</span><span class="drink-name">Cerveza IPA</span><span class="drink-price">+S/ 12</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="15" onchange="updateTotal()"/><span class="drink-icon">🍷</span><span class="drink-name">Vino Tinto Copa</span><span class="drink-price">+S/ 15</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="8" onchange="updateTotal()"/><span class="drink-icon">🍋</span><span class="drink-name">Limonada Menta</span><span class="drink-price">+S/ 8</span></label>
+              <label class="drink-item"><input type="radio" name="drink" data-price="6" onchange="updateTotal()"/><span class="drink-icon">🧊</span><span class="drink-name">Té Helado</span><span class="drink-price">+S/ 6</span></label>
+            </div>
+          </div>
+
+          <!-- Cantidad -->
+          <div class="modal-section">
+            <h4>Cantidad</h4>
+            <div class="qty-row">
+              <button class="qty-btn" onclick="changeQty(-1)">−</button>
+              <span class="qty-val" id="qtyVal">1</span>
+              <button class="qty-btn" onclick="changeQty(1)">+</button>
+              <span class="qty-total">Total: <strong id="totalPrice"></strong></span>
+            </div>
+          </div>
+
+          <!-- Agregar al carrito -->
+          <button class="btn-add-cart" onclick="addToCart()">
+            🛒 Agregar al carrito
+          </button>
+
+          <!-- También te puede gustar -->
+          <div class="modal-section">
+            <h4>También te puede gustar</h4>
+            <div class="related-grid" id="relatedGrid"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST -->
+  <div class="toast" id="toast">✅ Agregado al carrito</div>
+
+  <script src="js/main.js"></script>
+  <script src="js/menu.js"></script>
+</body>
+</html>

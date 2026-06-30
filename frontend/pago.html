@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pago — Mamma Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/pago.css"/>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'">
+        <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <main class="pago-main">
+
+    <!-- Paso indicador -->
+    <div class="steps-bar">
+      <div class="step-item done">
+        <div class="step-circle">✓</div>
+        <span>Carrito</span>
+      </div>
+      <div class="step-line done"></div>
+      <div class="step-item active">
+        <div class="step-circle">2</div>
+        <span>Pago</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-item">
+        <div class="step-circle">3</div>
+        <span>Confirmación</span>
+      </div>
+    </div>
+
+    <div class="pago-grid">
+
+      <!-- Columna izquierda: método de pago -->
+      <div class="pago-left">
+
+        <!-- YAPE -->
+        <div class="metodo-panel" id="panelYape">
+          <div class="metodo-header">
+            <span class="metodo-icon">📱</span>
+            <div>
+              <h3>Pagar con Yape</h3>
+              <p>Escanea el QR o ingresa el número</p>
+            </div>
+          </div>
+          <div class="qr-wrap">
+            <div class="qr-box">
+              <!-- QR simulado con SVG -->
+              <svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="white"/>
+                <!-- Esquinas QR -->
+                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="#1C1008" stroke-width="4"/>
+                <rect x="10" y="10" width="20" height="20" rx="1" fill="#1C1008"/>
+                <rect x="65" y="5" width="30" height="30" rx="3" fill="none" stroke="#1C1008" stroke-width="4"/>
+                <rect x="70" y="10" width="20" height="20" rx="1" fill="#1C1008"/>
+                <rect x="5" y="65" width="30" height="30" rx="3" fill="none" stroke="#1C1008" stroke-width="4"/>
+                <rect x="10" y="70" width="20" height="20" rx="1" fill="#1C1008"/>
+                <!-- Puntos internos simulados -->
+                <rect x="40" y="5" width="5" height="5" fill="#1C1008"/>
+                <rect x="48" y="5" width="5" height="5" fill="#1C1008"/>
+                <rect x="40" y="13" width="5" height="5" fill="#1C1008"/>
+                <rect x="55" y="13" width="5" height="5" fill="#1C1008"/>
+                <rect x="40" y="40" width="5" height="5" fill="#1C1008"/>
+                <rect x="48" y="48" width="5" height="5" fill="#1C1008"/>
+                <rect x="55" y="40" width="5" height="5" fill="#1C1008"/>
+                <rect x="40" y="55" width="5" height="5" fill="#1C1008"/>
+                <rect x="65" y="40" width="5" height="5" fill="#1C1008"/>
+                <rect x="73" y="48" width="5" height="5" fill="#1C1008"/>
+                <rect x="65" y="55" width="5" height="5" fill="#1C1008"/>
+                <rect x="80" y="40" width="5" height="5" fill="#1C1008"/>
+                <rect x="40" y="65" width="5" height="5" fill="#1C1008"/>
+                <rect x="48" y="73" width="5" height="5" fill="#1C1008"/>
+                <rect x="55" y="65" width="5" height="5" fill="#1C1008"/>
+                <rect x="65" y="73" width="5" height="5" fill="#1C1008"/>
+                <rect x="80" y="65" width="5" height="5" fill="#1C1008"/>
+                <rect x="73" y="80" width="5" height="5" fill="#1C1008"/>
+                <rect x="88" y="80" width="5" height="5" fill="#1C1008"/>
+              </svg>
+              <p class="qr-numero">📞 +51 987 654 321</p>
+              <p class="qr-hint">A nombre de: <strong>Pizzería MamaMia</strong></p>
+            </div>
+          </div>
+          <div class="sim-nota">
+            <span>🎓</span>
+            <p>Proyecto universitario — Este es un pago simulado. Presiona "Confirmar pago" para continuar.</p>
+          </div>
+          <button class="btn-confirmar-pago" onclick="simularPago()">
+            ✓ Confirmar pago · <span id="btnMontoYape"></span>
+          </button>
+        </div>
+
+        <!-- PLIN -->
+        <div class="metodo-panel hidden" id="panelPlin">
+          <div class="metodo-header">
+            <span class="metodo-icon">💜</span>
+            <div>
+              <h3>Pagar con Plin</h3>
+              <p>Escanea el QR o ingresa el número</p>
+            </div>
+          </div>
+          <div class="qr-wrap">
+            <div class="qr-box">
+              <svg viewBox="0 0 100 100" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+                <rect width="100" height="100" fill="white"/>
+                <rect x="5" y="5" width="30" height="30" rx="3" fill="none" stroke="#6B21A8" stroke-width="4"/>
+                <rect x="10" y="10" width="20" height="20" rx="1" fill="#6B21A8"/>
+                <rect x="65" y="5" width="30" height="30" rx="3" fill="none" stroke="#6B21A8" stroke-width="4"/>
+                <rect x="70" y="10" width="20" height="20" rx="1" fill="#6B21A8"/>
+                <rect x="5" y="65" width="30" height="30" rx="3" fill="none" stroke="#6B21A8" stroke-width="4"/>
+                <rect x="10" y="70" width="20" height="20" rx="1" fill="#6B21A8"/>
+                <rect x="40" y="5" width="5" height="5" fill="#6B21A8"/>
+                <rect x="48" y="13" width="5" height="5" fill="#6B21A8"/>
+                <rect x="55" y="5" width="5" height="5" fill="#6B21A8"/>
+                <rect x="40" y="40" width="5" height="5" fill="#6B21A8"/>
+                <rect x="55" y="48" width="5" height="5" fill="#6B21A8"/>
+                <rect x="65" y="40" width="5" height="5" fill="#6B21A8"/>
+                <rect x="80" y="55" width="5" height="5" fill="#6B21A8"/>
+                <rect x="40" y="65" width="5" height="5" fill="#6B21A8"/>
+                <rect x="55" y="73" width="5" height="5" fill="#6B21A8"/>
+                <rect x="65" y="65" width="5" height="5" fill="#6B21A8"/>
+                <rect x="80" y="73" width="5" height="5" fill="#6B21A8"/>
+              </svg>
+              <p class="qr-numero">📞 +51 987 654 321</p>
+              <p class="qr-hint">A nombre de: <strong>Pizzería MamaMia</strong></p>
+            </div>
+          </div>
+          <div class="sim-nota">
+            <span>🎓</span>
+            <p>Proyecto universitario — Este es un pago simulado. Presiona "Confirmar pago" para continuar.</p>
+          </div>
+          <button class="btn-confirmar-pago plin" onclick="simularPago()">
+            ✓ Confirmar pago · <span id="btnMontoPlin"></span>
+          </button>
+        </div>
+
+        <!-- TARJETA -->
+        <div class="metodo-panel hidden" id="panelTarjeta">
+          <div class="metodo-header">
+            <span class="metodo-icon">💳</span>
+            <div>
+              <h3>Pagar con Tarjeta</h3>
+              <p>Crédito o débito — Visa, Mastercard, Amex</p>
+            </div>
+          </div>
+          <div class="tarjeta-form">
+            <div class="tarjeta-preview" id="tarjetaPreview">
+              <div class="tarjeta-chip">▬▬</div>
+              <div class="tarjeta-numero" id="previewNumero">•••• •••• •••• ••••</div>
+              <div class="tarjeta-row">
+                <div>
+                  <p class="tarjeta-label">TITULAR</p>
+                  <p class="tarjeta-val" id="previewNombre">TU NOMBRE</p>
+                </div>
+                <div>
+                  <p class="tarjeta-label">VENCE</p>
+                  <p class="tarjeta-val" id="previewExp">MM/AA</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>Número de tarjeta</label>
+              <input type="text" placeholder="1234 5678 9012 3456" maxlength="19"
+                id="cardNum" oninput="formatCard(this)" autocomplete="cc-number"/>
+            </div>
+            <div class="field">
+              <label>Titular de la tarjeta</label>
+              <input type="text" placeholder="Como aparece en la tarjeta"
+                id="cardName" oninput="previewUpdate()" autocomplete="cc-name"/>
+            </div>
+            <div class="form-row-2">
+              <div class="field">
+                <label>Fecha de vencimiento</label>
+                <input type="text" placeholder="MM/AA" maxlength="5"
+                  id="cardExp" oninput="formatExp(this)" autocomplete="cc-exp"/>
+              </div>
+              <div class="field">
+                <label>CVV</label>
+                <input type="password" placeholder="•••" maxlength="3"
+                  id="cardCvv" autocomplete="cc-csc"/>
+              </div>
+            </div>
+            <span class="field-error" id="cardErr"></span>
+          </div>
+          <div class="sim-nota">
+            <span>🎓</span>
+            <p>Proyecto universitario — Usa cualquier número. Es un pago simulado.</p>
+          </div>
+          <button class="btn-confirmar-pago tarjeta" onclick="simularPago()">
+            ✓ Confirmar pago · <span id="btnMontoTarjeta"></span>
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Columna derecha: resumen -->
+      <div class="pago-right">
+        <div class="resumen-pago-card">
+          <h3>Tu pedido</h3>
+          <div id="resumenPagoItems"></div>
+
+          <!-- Modalidad -->
+          <div class="resumen-linea-p">
+            <span>Modalidad</span>
+            <span id="resModalidad" class="verde"></span>
+          </div>
+          <div class="resumen-linea-p" id="resDeliveryRow" style="display:none">
+            <span>Dirección</span>
+            <span id="resDireccion" style="font-size:0.78rem;color:var(--gray)"></span>
+          </div>
+          <div class="resumen-linea-p">
+            <span>Subtotal</span>
+            <span id="resSubtotalP"></span>
+          </div>
+          <div class="resumen-linea-p">
+            <span>Envío</span>
+            <span id="resEnvio" class="verde">Gratis</span>
+          </div>
+          <div class="resumen-linea-p total-p">
+            <span>Total</span>
+            <span id="resTotalP"></span>
+          </div>
+
+          <!-- Selector método de pago en resumen -->
+          <div class="metodo-selector">
+            <p class="selector-label">Método de pago</p>
+            <div class="selector-btns">
+              <button class="sel-btn active" id="selYape" onclick="selMetodo('yape')">📱 Yape</button>
+              <button class="sel-btn" id="selPlin" onclick="selMetodo('plin')">💜 Plin</button>
+              <button class="sel-btn" id="selTarjeta" onclick="selMetodo('tarjeta')">💳 Tarjeta</button>
+            </div>
+          </div>
+
+          <a href="carrito.html" class="volver-link">← Volver al carrito</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Overlay de procesando -->
+  <div class="procesando-overlay hidden" id="procesandoOverlay">
+    <div class="procesando-card">
+      <div class="procesando-spinner"></div>
+      <h3>Procesando pago...</h3>
+      <p>Por favor espera un momento</p>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/pago.js"></script>
+</body>
+</html>

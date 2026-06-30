@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nosotros — Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/nosotros.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html" class="active">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'" aria-label="Carrito">
+      <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section class="nos-hero">
+    <div class="nos-hero-bg" id="nosBg"></div>
+    <div class="nos-hero-overlay"></div>
+    <div class="nos-hero-content">
+      <p class="nos-hero-tag">NUESTRA HISTORIA</p>
+      <h1 class="nos-hero-title">Nuestra Historia</h1>
+      <p class="nos-hero-sub">Desde Nápoles hasta tu mesa, con amor.</p>
+    </div>
+  </section>
+
+  <!-- ── HISTORIA ── -->
+  <section class="historia">
+    <div class="historia-grid">
+      <div class="historia-text reveal">
+        <p class="section-label">DESDE 1987</p>
+        <h2 class="section-title" style="margin-bottom:1.2rem">Una familia, una pasión.</h2>
+        <p>Todo comenzó cuando Aldo Ferretti, un joven pizzaiolo calabrés, decidió cruzar el Atlántico con una maleta llena de sueños y la receta de su madre cosida en el forro. En 1950 llegó al Perú, y en 1998 su nieta Rosa abrió las puertas de Mama Mia en la Av. Lima Sur 617, Chosica.</p>
+        <p>Lo que empezó como un pequeño local con cuatro mesas se convirtió en el punto de encuentro del barrio. La gente venía por la pizza, pero volvía por el ambiente, las risas y ese aroma inconfundible a masa recién horneada que se escapaba por la calle.</p>
+        <p>Hoy, la familia Quispe-Ferretti sigue amasando con las manos, seleccionando cada tomate y cuidando el fuego del mismo horno de leña napolitano importado directamente desde la misma Italia.</p>
+      </div>
+      <div class="historia-img-col reveal delay1">
+        <div class="historia-img-wrap">
+          <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80" alt="Preparando pizza"/>
+        </div>
+        <div class="historia-badge">
+          <span class="badge-num">+38</span>
+          <span class="badge-label">años de tradición</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BISABUELO ── -->
+  <section class="bisabuelo">
+    <div class="bisabuelo-card reveal">
+      <div class="bisabuelo-img-wrap">
+        <img src="img/foto_bisabuelo.png" alt="Aldo Ferretti"/>
+      </div>
+      <div class="bisabuelo-text">
+        <p class="section-label">EL ORIGEN DE TODO</p>
+        <h3 class="bisabuelo-title">Aldo Ferretti, <em>el bisabuelo</em></h3>
+        <p>Aldo llegó al Perú en 1950 desde Calabria con poco más que su fe y las recetas de su madre. Se instaló en Lima, luego en Chosica, donde encontró en el clima serrano el ambiente perfecto para fermentar su masa. Nunca abrió un restaurante, pero su cocina siempre estuvo llena de vecinos que venían a probar "la pizza del italiano". Ese espíritu de generosidad y autenticidad es el que hoy vive en cada pizza que sale de nuestro horno.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TIMELINE ── -->
+  <section class="timeline-section">
+    <div class="timeline-header reveal">
+      <p class="section-label" style="color:rgba(255,255,255,0.5)">NUESTRA TRAYECTORIA</p>
+      <h2 class="timeline-main-title">Hitos que nos</h2>
+      <h2 class="timeline-main-italic">definen</h2>
+    </div>
+
+    <div class="timeline">
+
+      <div class="timeline-item left reveal">
+        <div class="timeline-content">
+          <p>Aldo Ferretti, bisabuelo de la familia, emigra desde Calabria, Italia, al Perú buscando nuevas oportunidades. Trae consigo las recetas de su madre y el amor por la pizza.</p>
+        </div>
+        <div class="timeline-dot">1950</div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item right reveal delay1">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot">1955</div>
+        <div class="timeline-content">
+          <p>La familia Ferretti se establece definitivamente en Chosica. La nonna Carmela sigue preparando pizza en casa para toda la familia del barrio.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left reveal">
+        <div class="timeline-content">
+          <p>Rosa Ferretti de Quispe abre la primera Pizzería MamaMia en la Av. Lima Sur 617, Chosica, con un horno de barro artesanal y las recetas heredadas de su bisabuelo.</p>
+        </div>
+        <div class="timeline-dot">1998</div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item right reveal delay1">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot">2005</div>
+        <div class="timeline-content">
+          <p>Marco Quispe viaja a Nápoles y obtiene la certificación de la Associazione Verace Pizza Napoletana (AVPN). MamaMia se convierte en la única pizzería certificada de la zona.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left reveal">
+        <div class="timeline-content">
+          <p>Instalación del horno de leña napolitano importado directamente de Italia. La temperatura alcanza los 485°C para una cocción perfecta en 90 segundos.</p>
+        </div>
+        <div class="timeline-dot">2012</div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+      <div class="timeline-item right reveal delay1">
+        <div class="timeline-spacer"></div>
+        <div class="timeline-dot">2020</div>
+        <div class="timeline-content">
+          <p>Valentina Quispe se une al equipo tras graduarse de Le Cordon Bleu Lima, lanzando la carta de postres italianos artesanales y renovando la experiencia del local.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item left reveal">
+        <div class="timeline-content">
+          <p>MamaMia lanza su plataforma de pedidos online, llevando la auténtica pizza italiana a toda la comunidad de Chosica y alrededores.</p>
+        </div>
+        <div class="timeline-dot">2024</div>
+        <div class="timeline-spacer"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── VALORES ── -->
+  <section class="valores">
+    <h2 class="section-title" style="text-align:center;margin-bottom:3rem">Nuestros valores</h2>
+    <div class="valores-grid">
+      <div class="valor-card reveal">
+        <div class="valor-icon red-light">❤️</div>
+        <h3>Pasión</h3>
+        <p>Cada pizza que hacemos lleva el amor y dedicación de nuestra familia italiana.</p>
+      </div>
+      <div class="valor-card reveal delay1">
+        <div class="valor-icon gold-light">🏅</div>
+        <h3>Calidad</h3>
+        <p>Solo los mejores ingredientes. Sin compromisos. Sin atajos.</p>
+      </div>
+      <div class="valor-card reveal delay2">
+        <div class="valor-icon orange-light">👥</div>
+        <h3>Comunidad</h3>
+        <p>Somos parte de tu barrio. Tu mesa siempre estará lista para ti.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── EQUIPO ── -->
+  <section class="equipo">
+    <p class="section-label" style="text-align:center">LAS PERSONAS DETRÁS</p>
+    <h2 class="section-title" style="text-align:center;margin-bottom:3rem">Nuestro equipo</h2>
+    <div class="equipo-grid">
+      <div class="equipo-card reveal">
+        <div class="equipo-avatar">G</div>
+        <h3>Giuseppe Rossi</h3>
+        <p class="equipo-rol">Chef Fundador</p>
+        <p class="equipo-desc">Nacido en Nápoles, Giuseppe trajo sus secretos familiares a Lima en 1987.</p>
+      </div>
+      <div class="equipo-card reveal delay1">
+        <div class="equipo-avatar">M</div>
+        <h3>Maria Rossi</h3>
+        <p class="equipo-rol">Directora Creativa</p>
+        <p class="equipo-desc">Hija de Giuseppe, María fusiona la tradición con nuevas tendencias culinarias.</p>
+      </div>
+      <div class="equipo-card reveal delay2">
+        <div class="equipo-avatar">M</div>
+        <h3>Marco Bianchi</h3>
+        <p class="equipo-rol">Pizzaiolo Senior</p>
+        <p class="equipo-desc">Con 20 años de experiencia, Marco domina el arte del horno de leña.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="nos-cta reveal">
+    <h2>¿Listo para probar la auténtica pizza<br>italiana en Chosica?</h2>
+    <p>Haz tu pedido online y recógelo en nuestro local de la Av. Lima Sur 617, Chosica.</p>
+    <a href="menu.html" class="nos-cta-btn">🛒 Ordenar Ahora</a>
+  </section>
+
+  <!-- FOOTER -->
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/nosotros.js"></script>
+</body>
+</html>

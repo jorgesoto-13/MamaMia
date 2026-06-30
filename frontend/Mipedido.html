@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mi Pedido — Mamma Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/Mipedido.css"/>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="Mipedido.html" class="active">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'">🛒</button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <main class="pedido-main">
+
+    <!-- Sin pedido -->
+    <div class="no-pedido hidden" id="noPedido">
+      <div class="no-pedido-icon">🍕</div>
+      <h2>No tienes pedidos activos</h2>
+      <p>Haz tu pedido desde el menú y podrás seguirlo aquí.</p>
+      <a href="menu.html" class="btn-red">Ver el Menú</a>
+    </div>
+
+    <!-- Con pedido -->
+    <div class="pedido-wrap" id="pedidoWrap">
+
+      <!-- Header -->
+      <div class="pedido-header">
+        <div>
+          <h1>Mi Pedido</h1>
+          <p class="pedido-num">Número: <strong id="pedidoNum"></strong></p>
+        </div>
+        <div class="pedido-pago-badge" id="pedidoPago"></div>
+      </div>
+
+      <div class="pedido-grid">
+
+        <!-- Izquierda: tracker -->
+        <div class="pedido-tracker">
+
+          <!-- Timeline de estados -->
+          <div class="tracker-card">
+            <h3>Estado del pedido</h3>
+            <div class="tracker-steps" id="trackerSteps">
+              <!-- Renderizado por JS -->
+            </div>
+          </div>
+
+          <!-- Info recojo -->
+          <div class="recojo-card">
+            <div class="recojo-card-header">
+              <span class="recojo-card-icon">🏪</span>
+              <h4>Recojo en local</h4>
+            </div>
+            <p>Jr. Grau 245, Chosica, Lima</p>
+            <p class="recojo-time" id="tiempoEstimado"></p>
+            <a href="https://maps.google.com/?q=Jr.+Grau+245+Chosica+Lima" target="_blank" class="maps-link">Ver en Google Maps ↗</a>
+          </div>
+
+          <!-- Cancelar (solo si está en espera) -->
+          <button class="btn-cancelar" id="btnCancelar" onclick="cancelarPedido()">
+            Cancelar pedido
+          </button>
+        </div>
+
+        <!-- Derecha: resumen -->
+        <div class="pedido-resumen">
+          <div class="resumen-card-p">
+            <h3>Resumen del pedido</h3>
+            <div id="pedidoItems" class="pedido-items-list"></div>
+            <div class="resumen-linea-p">
+              <span>Subtotal</span><span id="pSubtotal"></span>
+            </div>
+            <div class="resumen-linea-p">
+              <span>Modalidad</span><span class="modalidad-badge-p">🏪 Recojo en local</span>
+            </div>
+            <div class="resumen-linea-p total-p">
+              <span>Total pagado</span><span id="pTotal"></span>
+            </div>
+
+            <!-- Datos contacto -->
+            <div class="pedido-contacto" id="pedidoContacto"></div>
+
+            <!-- Notas -->
+            <div class="pedido-notas" id="pedidoNotas"></div>
+          </div>
+
+          <!-- Nuevo pedido -->
+          <a href="menu.html" class="btn-nuevo-pedido">🍕 Hacer nuevo pedido</a>
+
+          <!-- HISTORIAL DE PEDIDOS -->
+          <section class="historial-section">
+            <h2 class="historial-title">Historial de pedidos</h2>
+            <div id="historialList"></div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/Mipedido.js"></script>
+</body>
+</html>
