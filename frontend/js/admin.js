@@ -1,33 +1,11 @@
 /* =============================================
-   admin.js — Panel Administrativo Mama Mia
+   admin.js — Panel Administrativo Conectado a Railway
    ============================================= */
 
-// ── DATOS DE DEMO ──
-const PRODUCTOS = [
-    { id: 1, nombre: 'Margherita Classica', cat: 'clasicas', desc: 'Salsa San Marzano, mozzarella fior di latte y albahaca fresca.', precios: { personal: 28.90, mediana: 33.90, familiar: 39.90 }, estado: 'activo', img: 'img/pizza_margherita.png', vendidos: 48 },
-    { id: 2, nombre: 'Diávola Ardiente', cat: 'especiales', desc: 'Pepperoni premium, jalapeños y salsa arrabiata.', precios: { personal: 34.90, mediana: 39.90, familiar: 45.90 }, estado: 'activo', img: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=800&q=80', vendidos: 35 },
-    { id: 3, nombre: 'Verdure di Stagione', cat: 'vegetarianas', desc: 'Calabacín, pimientos, berenjenas y tomates cherry.', precios: { personal: 30.90, mediana: 35.90, familiar: 41.90 }, estado: 'activo', img: 'https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=800&q=80', vendidos: 22 },
-    { id: 4, nombre: 'Pizza Pesto y Pollo', cat: 'gourmet', desc: 'Base de salsa pesto genovés artesanal, mozzarella, pollo a la parrilla y tomates cherry.', precios: { personal: 42.90, mediana: 47.90, familiar: 54.90 }, estado: 'activo', img: 'https://images.unsplash.com/photo-1573821663912-569905455b1c?w=800&q=80', vendidos: 18 },
-    { id: 5, nombre: 'Quattro Stagioni', cat: 'clasicas', desc: 'Champiñones, aceitunas, alcachofas y jamón cocido.', precios: { personal: 38.90, mediana: 43.90, familiar: 49.90 }, estado: 'activo', img: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=800&q=80', vendidos: 14 },
-    { id: 6, nombre: 'Tartufo Nero', cat: 'gourmet', desc: 'Crema de trufa negra, mozzarella de búfala y porcini.', precios: { personal: 46.90, mediana: 51.90, familiar: 58.90 }, estado: 'inactivo', img: 'https://images.unsplash.com/photo-1594007654729-407eedc4be65?w=800&q=80', vendidos: 9 },
-];
-
-const PEDIDOS = [
-    { num: 'MM-183421', cliente: 'Ana Torres', items: 'Margherita x1', modalidad: 'recojo', pago: 'yape', total: 33.90, estado: 1, hora: '10:32' },
-    { num: 'MM-183420', cliente: 'Carlos Ríos', items: 'Diávola x2', modalidad: 'delivery', pago: 'tarjeta', total: 89.80, estado: 2, hora: '10:18' },
-    { num: 'MM-183419', cliente: 'Lucía Mamani', items: 'Verdure x1, Pepsi x1', modalidad: 'recojo', pago: 'plin', total: 35.90, estado: 3, hora: '09:55' },
-    { num: 'MM-183418', cliente: 'Pedro Quispe', items: 'Quattro x1', modalidad: 'recojo', pago: 'yape', total: 43.90, estado: 4, hora: '09:30' },
-    { num: 'MM-183417', cliente: 'María Flores', items: 'Prosciutto x1', modalidad: 'delivery', pago: 'tarjeta', total: 54.90, estado: 4, hora: '09:10' },
-    { num: 'MM-183416', cliente: 'José Ramos', items: 'Tartufo x1', modalidad: 'recojo', pago: 'yape', total: 51.90, estado: 4, hora: '08:48' },
-];
-
-const USUARIOS = [
-    { nombre: 'Ana Torres', email: 'ana@gmail.com', pedidos: 5, registro: '15/03/2026', estado: 'activo' },
-    { nombre: 'Carlos Ríos', email: 'carlos@gmail.com', pedidos: 12, registro: '02/01/2026', estado: 'activo' },
-    { nombre: 'Lucía Mamani', email: 'lucia@gmail.com', pedidos: 3, registro: '20/04/2026', estado: 'activo' },
-    { nombre: 'Pedro Quispe', email: 'pedro@gmail.com', pedidos: 8, registro: '10/02/2026', estado: 'activo' },
-    { nombre: 'María Flores', email: 'maria@gmail.com', pedidos: 1, registro: '25/04/2026', estado: 'inactivo' },
-];
+// ── 1. DATOS GLOBALES (Vacíos, se llenarán desde la nube) ──
+let PRODUCTOS = [];
+let PEDIDOS = [];
+let USUARIOS = [];
 
 const ESTADOS_LABELS = [
     { label: 'Confirmado', icon: '✅', cls: 'confirmado' },
@@ -39,28 +17,91 @@ const ESTADOS_LABELS = [
 
 const PAGO_LABELS = { yape: '📱 Yape', plin: '💜 Plin', tarjeta: '💳 Tarjeta' };
 
-let productosFiltrados = [...PRODUCTOS];
-let pedidosFiltrados = [...PEDIDOS];
-let usuariosFiltrados = [...USUARIOS];
+let productosFiltrados = [];
+let pedidosFiltrados = [];
+let usuariosFiltrados = [];
 let pedidoEditando = null;
 let productoEditando = null;
 
-// ── INIT ──
-document.addEventListener('DOMContentLoaded', () => {
+// ── 2. INIT (Al cargar la página) ──
+document.addEventListener('DOMContentLoaded', async () => {
     // Fecha topbar
     document.getElementById('topbarDate').textContent =
         new Date().toLocaleDateString('es-PE', { weekday: 'long', day: 'numeric', month: 'long' });
+
+    // ¡MAGIA!: Cargar absolutamente todo desde Railway
+    await cargarDatosDesdeRailway();
 
     // Badge pedidos pendientes
     const pendientes = PEDIDOS.filter(p => p.estado < 3).length;
     document.getElementById('badgePedidos').textContent = pendientes;
 
+    // Dibujar las pantallas con los datos reales
     renderDashboard();
     renderPedidos();
     renderProductos();
     renderUsuarios();
     renderReportes();
 });
+
+// ── 3. CONEXIÓN Y TRADUCCIÓN CON SPRING BOOT ──
+async function cargarDatosDesdeRailway() {
+    try {
+        // Pedimos a Java que nos entregue las 3 listas al mismo tiempo
+        const [resProd, resPed, resUsr] = await Promise.all([
+            fetch('https://pizzeria-mamamia-production-5cf6.up.railway.app/api/productos'),
+            fetch('https://pizzeria-mamamia-production-5cf6.up.railway.app/api/pedidos'),
+            fetch('https://pizzeria-mamamia-production-5cf6.up.railway.app/api/usuarios')
+        ]);
+
+        const dataProd = resProd.ok ? await resProd.json() : [];
+        const dataPed = resPed.ok ? await resPed.json() : [];
+        const dataUsr = resUsr.ok ? await resUsr.json() : [];
+
+        // TRADUCTOR A: De Java a Productos del Frontend
+        PRODUCTOS = dataProd.map(p => ({
+            id: p.id,
+            nombre: p.nombre,
+            cat: p.categoria ? p.categoria.toLowerCase() : 'clasicas',
+            desc: p.descripcion,
+            precios: { personal: p.precioPersonal || 0, mediana: p.precioMediana || 0, familiar: p.precioFamiliar || 0 },
+            estado: p.estado || 'activo',
+            img: p.imagenUrl || 'img/pizza_margherita.png',
+            vendidos: Math.floor(Math.random() * 50) + 1 // Simulamos ventas para los gráficos
+        }));
+
+        // TRADUCTOR B: De Java a Pedidos del Frontend
+        PEDIDOS = dataPed.map(p => ({
+            idDB: p.id, // Guardamos el ID real por si lo necesitamos editar luego
+            num: p.numPedido,
+            cliente: p.clienteNombre || 'Cliente Anónimo',
+            items: "Ver detalle en sistema",
+            modalidad: p.modalidad || 'recojo',
+            pago: p.metodoPago || 'yape',
+            total: p.total || 0,
+            estado: p.estado || 0,
+            hora: p.fecha ? new Date(p.fecha).toLocaleTimeString('es-PE', {hour: '2-digit', minute:'2-digit'}) : 'Reciente'
+        }));
+
+        // TRADUCTOR C: De Java a Usuarios del Frontend
+        USUARIOS = dataUsr.map(u => ({
+            nombre: u.nombre,
+            email: u.correo,
+            pedidos: 1,
+            registro: 'Nuevo',
+            estado: 'activo'
+        }));
+
+        // Asignamos los datos traducidos a las listas que dibujan las tablas
+        productosFiltrados = [...PRODUCTOS];
+        pedidosFiltrados = [...PEDIDOS].reverse(); // .reverse() pone los pedidos más recientes hasta arriba
+        usuariosFiltrados = [...USUARIOS];
+
+    } catch (error) {
+        console.error("Error conectando al servidor Admin", error);
+        showToast('Error cargando los datos de la nube', 'error');
+    }
+}
 
 // ── NAVEGACIÓN ──
 function showSection(id) {
@@ -92,17 +133,19 @@ function renderDashboard() {
 
     // Ranking pizzas
     const ranking = document.getElementById('dashRanking');
-    const sorted = [...PRODUCTOS].sort((a, b) => b.vendidos - a.vendidos).slice(0, 4);
-    const max = sorted[0].vendidos;
-    ranking.innerHTML = sorted.map((p, i) => `
-    <div class="rank-item">
-      <span class="rank-num">${i + 1}</span>
-      <div class="rank-bar-wrap">
-        <p class="rank-name">${p.nombre}</p>
-        <div class="rank-bar" style="width:${(p.vendidos / max * 100)}%"></div>
-      </div>
-      <span class="rank-count">${p.vendidos} pedidos</span>
-    </div>`).join('');
+    if(PRODUCTOS.length > 0) {
+        const sorted = [...PRODUCTOS].sort((a, b) => b.vendidos - a.vendidos).slice(0, 4);
+        const max = sorted[0].vendidos || 1;
+        ranking.innerHTML = sorted.map((p, i) => `
+        <div class="rank-item">
+          <span class="rank-num">${i + 1}</span>
+          <div class="rank-bar-wrap">
+            <p class="rank-name">${p.nombre}</p>
+            <div class="rank-bar" style="width:${(p.vendidos / max * 100)}%"></div>
+          </div>
+          <span class="rank-count">${p.vendidos} pedidos</span>
+        </div>`).join('');
+    }
 
     // Métodos de pago
     const pagos = { yape: 5, plin: 3, tarjeta: 4 };
@@ -110,9 +153,9 @@ function renderDashboard() {
     const colores = { yape: '#16A34A', plin: '#7C3AED', tarjeta: '#1D4ED8' };
     document.getElementById('pagoBars').innerHTML = Object.entries(pagos).map(([k, v]) => `
     <div class="pago-bar-item">
-      <span class="pago-bar-label">${PAGO_LABELS[k]}</span>
+      <span class="pago-bar-label">${PAGO_LABELS[k] || k}</span>
       <div class="pago-bar-track">
-        <div class="pago-bar-fill" style="width:${v / totalPagos * 100}%;background:${colores[k]}"></div>
+        <div class="pago-bar-fill" style="width:${v / totalPagos * 100}%;background:${colores[k] || '#ccc'}"></div>
       </div>
       <span class="pago-bar-pct">${Math.round(v / totalPagos * 100)}%</span>
     </div>`).join('');
@@ -126,7 +169,7 @@ function renderPedidos(lista = pedidosFiltrados) {
       <td>${p.cliente}</td>
       <td style="font-size:0.78rem;color:var(--gray)">${p.items}</td>
       <td>${p.modalidad === 'delivery' ? '🛵 Delivery' : '🏪 Recojo'}</td>
-      <td>${PAGO_LABELS[p.pago]}</td>
+      <td>${PAGO_LABELS[p.pago] || p.pago}</td>
       <td><strong>S/ ${p.total.toFixed(2)}</strong></td>
       <td><span class="badge ${ESTADOS_LABELS[p.estado].cls}">${ESTADOS_LABELS[p.estado].icon} ${ESTADOS_LABELS[p.estado].label}</span></td>
       <td>
