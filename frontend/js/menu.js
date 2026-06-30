@@ -20,6 +20,7 @@ const ro = new IntersectionObserver((entries) => {
 }, { threshold: 0.1 });
 
 // ── 3. CARGA DINÁMICA DESDE LA BASE DE DATOS (RAILWAY) ──
+// ── 3. CARGA DINÁMICA DESDE LA BASE DE DATOS (RAILWAY) ──
 async function cargarMenuDinamicamente() {
     try {
         // Hacemos la petición a tu backend en la nube
@@ -51,25 +52,31 @@ async function cargarMenuDinamicamente() {
                 medianaPrice: producto.precioMediana,
                 familiarPrice: producto.precioFamiliar,
                 img: producto.imagenUrl || 'img/pizza_margherita.png',
-                ingredients: ['Queso Mozzarella', 'Salsa de Tomate'], // Por defecto
-                related: [] // Por defecto
+                ingredients: ['Queso Mozzarella', 'Salsa de Tomate'],
+                related: []
             };
 
-            // Construir la tarjeta HTML e inyectarla
+            // Construir la tarjeta HTML con el diseño EXACTO de JC
             const card = document.createElement('div');
             card.className = 'pizza-card';
-            card.dataset.cat = producto.categoria;
+            card.dataset.cat = producto.categoria.toLowerCase(); // Para que funcionen los botones de filtro
+
             card.innerHTML = `
-                <img class="pizza-img" src="${pizzas[producto.id].img}" alt="${producto.nombre}"/>
-                <div class="pizza-info">
-                    <span class="cat-tag" style="background: ${color}">${producto.categoria}</span>
-                    <h3 class="pizza-name">${producto.nombre}</h3>
-                    <p class="pizza-desc">${producto.descripcion}</p>
-                    <div class="pizza-bottom">
-                        <span class="pizza-price">Desde S/ ${producto.precioPersonal.toFixed(2)}</span>
-                        <button class="btn-add" onclick="openDetail('${producto.id}')">Pedir</button>
-                    </div>
+              <div class="pizza-img-wrap">
+                <img src="${pizzas[producto.id].img}" alt="${producto.nombre}" loading="lazy"/>
+                <span class="pizza-cat" style="background:${color}">${producto.categoria}</span>
+              </div>
+              <div class="pizza-body">
+                <h3>${producto.nombre}</h3>
+                <p>${producto.descripcion}</p>
+                <div class="pizza-foot">
+                  <div>
+                    <div class="pizza-from">Desde</div>
+                    <div class="pizza-price">S/ ${producto.precioPersonal.toFixed(2)}</div>
+                  </div>
+                  <button class="btn-ver" onclick="openDetail('${producto.id}')">Ver más →</button>
                 </div>
+              </div>
             `;
             grid.appendChild(card);
 
