@@ -109,31 +109,57 @@ function validarTarjeta() {
 
 // ── SIMULAR PAGO ──
 function simularPago() {
-    // Validar tarjeta si es ese método
     if (metodoActual === 'tarjeta' && !validarTarjeta()) return;
 
-    // Mostrar overlay procesando
     const overlay = document.getElementById('procesandoOverlay');
     overlay.classList.remove('hidden');
 
-    setTimeout(() => {
+    const numAleatorio = 'MM-' + Math.floor(100000 + Math.random() * 900000);
+    const telInput = document.getElementById('telefono') ? document.getElementById('telefono').value : "999999999";
+    const dirInput = document.getElementById('direccion') ? document.getElementById('direccion').value : "Recojo en local";
+
+    // Preparamos los datos para Spring Boot
+    const pedidoDB = {
+        numPedido: numAleatorio,
+        clienteNombre: "Cliente General",
+        telefono: telInput,
+        direccion: dirInput,
+        modalidad: pedidoPendiente.modalidad || "recojo",
+        metodoPago: metodoActual,
+        total: parseFloat(pedidoPendiente.total),
+        estado: 0
+    };
+
+    fetch('http://localhost:8080/api/pedidos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(pedidoDB)
+    })
+    .then(response => {
+        if (!response.ok) throw new Error("Error al guardar en BD");
+        return response.json();
+    })
+    .then(data => {
+        setTimeout(() => {
+            overlay.classList.add('hidden');
+            const pedidoLocal = { ...pedidoPendiente };
+            pedidoLocal.estado = 0;
+            pedidoLocal.pagado = true;
+            pedidoLocal.metodoPago = metodoActual;
+            pedidoLocal.creado = new Date().toISOString();
+            pedidoLocal.num = numAleatorio;
+
+            localStorage.setItem('mamamia_pedido', JSON.stringify(pedidoLocal));
+            localStorage.removeItem('mamamia_pedido_pendiente');
+            localStorage.removeItem('mamamia_cart');
+            window.dispatchEvent(new CustomEvent('cartUpdated'));
+            location.href = 'Mipedido.html';
+        }, 1500);
+    })
+    .catch(error => {
         overlay.classList.add('hidden');
-
-        // Confirmar pedido — mover de pendiente a activo
-        const pedido = { ...pedidoPendiente };
-        pedido.estado = 0;
-        pedido.pagado = true;
-        pedido.metodoPago = metodoActual;
-        pedido.creado = new Date().toISOString();
-        pedido.num = 'MM-' + Math.floor(100000 + Math.random() * 900000);
-
-        localStorage.setItem('mamamia_pedido', JSON.stringify(pedido));
-        localStorage.removeItem('mamamia_pedido_pendiente');
-        localStorage.removeItem('mamamia_cart');
-        window.dispatchEvent(new CustomEvent('cartUpdated'));
-
-        location.href = 'mipedido.html';
-    }, 2200);
+        showToast('Error conectando con el servidor', 'error');
+    });
 }
 
 initResumen();
