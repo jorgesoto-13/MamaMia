@@ -1,0 +1,580 @@
+/* =============================================
+   nosotros.css — Página Nosotros
+   =============================================
+*/
+
+/* ── HERO ── */
+.nos-hero {
+    position: relative;
+    height: 45vh;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.nos-hero-bg {
+    position: absolute;
+    inset: 0;
+    background: url('../img/bg_hero_nosotros.png') center/cover no-repeat;
+    transform: scale(1.05);
+    transition: transform 7s ease;
+}
+
+.nos-hero-bg.loaded {
+    transform: scale(1);
+}
+
+.nos-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(20, 6, 0, 0.72) 0%, rgba(100, 30, 10, 0.4) 100%);
+}
+
+.nos-hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 8%;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s ease forwards;
+}
+
+.nos-hero-tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    color: rgba(255, 255, 255, 0.55);
+    margin-bottom: 0.6rem;
+}
+
+.nos-hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+.nos-hero-sub {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+}
+
+/* ── HISTORIA ── */
+.historia {
+    background: var(--cream);
+    padding: 5.5rem 6%;
+}
+
+.historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.historia-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.historia-text p {
+    font-size: 0.92rem;
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+.historia-img-col {
+    position: relative;
+}
+
+.historia-img-wrap {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+.historia-img-wrap img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+.historia-badge {
+    position: absolute;
+    bottom: -1rem;
+    left: -1rem;
+    background: #fff;
+    border-radius: 18px;
+    padding: 1.2rem 1.6rem;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    z-index: 10;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.badge-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+}
+
+.badge-label {
+    font-size: 0.75rem;
+    color: var(--gray);
+    margin-top: 0.2rem;
+}
+
+/* ── BISABUELO ── */
+.bisabuelo {
+    background: #fff;
+    padding: 4rem 6%;
+}
+
+.bisabuelo-card {
+    display: flex;
+    gap: 2.5rem;
+    align-items: center;
+    background: var(--cream);
+    border-radius: 20px;
+    padding: 2.5rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.bisabuelo-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.09);
+}
+
+.bisabuelo-img-wrap {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 3px solid rgba(200, 55, 45, 0.2);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.bisabuelo-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.3);
+}
+
+.bisabuelo-text {
+    flex: 1;
+}
+
+.bisabuelo-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin: 0.4rem 0 0.8rem;
+}
+
+.bisabuelo-title em {
+    color: var(--red);
+    font-style: italic;
+}
+
+.bisabuelo-text p {
+    font-size: 0.88rem;
+    color: var(--gray);
+    line-height: 1.8;
+    font-weight: 300;
+}
+
+/* ── TIMELINE ── */
+.timeline-section {
+    background: #2C1208;
+    padding: 6rem 6%;
+}
+
+.timeline-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.timeline-main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1.1;
+}
+
+.timeline-main-italic {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 900;
+    font-style: italic;
+    color: var(--gold);
+    line-height: 1.2;
+}
+
+.timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(200, 55, 45, 0.35);
+    transform: translateX(-50%);
+}
+
+.timeline-item {
+    display: grid;
+    grid-template-columns: 1fr 60px 1fr;
+    align-items: center;
+    gap: 1rem;
+}
+
+.timeline-item.right .timeline-content {
+    grid-column: 3;
+}
+
+.timeline-item.left .timeline-content {
+    grid-column: 1;
+    text-align: right;
+}
+
+.timeline-content {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    padding: 1.2rem 1.5rem;
+    backdrop-filter: blur(4px);
+    transition: background 0.3s, transform 0.3s;
+}
+
+.timeline-content:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(1.02);
+}
+
+.timeline-content p {
+    font-size: 0.84rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.7;
+    font-weight: 300;
+}
+
+.timeline-dot {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(200, 55, 45, 0.25), 0 6px 20px rgba(200, 55, 45, 0.4);
+    z-index: 1;
+    flex-shrink: 0;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.timeline-dot:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 6px rgba(200, 55, 45, 0.3), 0 8px 24px rgba(200, 55, 45, 0.5);
+}
+
+.timeline-spacer {
+    /* empty space on opposite side */
+}
+
+/* ── VALORES ── */
+.valores {
+    background: #fff;
+    padding: 5.5rem 6%;
+}
+
+.valores-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.valor-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    /* 👇 sombra más profunda y natural */
+    box-shadow: 
+        0 12px 35px rgba(0, 0, 0, 0.10),
+        0 4px 12px rgba(0, 0, 0, 0.06);
+
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.valor-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 
+        0 25px 60px rgba(0, 0, 0, 0.18),
+        0 8px 20px rgba(0, 0, 0, 0.10);
+}
+
+.valor-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin: 0 auto 1.2rem;
+}
+
+.red-light {
+    background: #FDECEA;
+}
+
+.gold-light {
+    background: #FEF8E7;
+}
+
+.orange-light {
+    background: #FEF3E8;
+}
+
+.valor-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.valor-card p {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.65;
+    font-weight: 400;
+}
+
+/* ── EQUIPO ── */
+.equipo {
+    background: var(--cream);
+    padding: 5.5rem 6%;
+}
+
+.equipo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.equipo-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 2.2rem 1.8rem;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.equipo-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.09);
+}
+
+.equipo-avatar {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C8372D, #E8522A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 auto 1rem;
+    box-shadow: 0 6px 18px rgba(200, 55, 45, 0.3);
+}
+
+.equipo-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+}
+
+.equipo-rol {
+    font-size: 0.8rem;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 0.7rem;
+}
+
+.equipo-desc {
+    font-size: 0.88rem;
+    color: #555;
+    line-height: 1.6;
+    font-weight: 400;
+}
+
+/* ── CTA ── */
+.nos-cta {
+    background: var(--red);
+    padding: 5rem 6%;
+    text-align: center;
+}
+
+.nos-cta h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3vw, 2.4rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 0.8rem;
+    line-height: 1.25;
+}
+
+.nos-cta p {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.92rem;
+    font-weight: 300;
+    margin-bottom: 2rem;
+}
+
+.nos-cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #fff;
+    color: var(--red);
+    padding: 0.9rem 2rem;
+    border-radius: 50px;
+    font-size: 0.92rem;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.nos-cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+}
+
+/* ── REVEAL ── */
+.reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.delay1 {
+    transition-delay: 0.12s;
+}
+
+.delay2 {
+    transition-delay: 0.22s;
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .historia-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .valores-grid,
+    .equipo-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .bisabuelo-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .timeline::before {
+        left: 30px;
+    }
+
+    .timeline-item {
+        grid-template-columns: 60px 1fr;
+    }
+
+    .timeline-item.left .timeline-content,
+    .timeline-item.right .timeline-content {
+        grid-column: 2;
+        text-align: left;
+    }
+
+    .timeline-item.right .timeline-dot {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .timeline-item.left .timeline-dot {
+        grid-column: 1;
+        grid-row: 1;
+    }
+
+    .timeline-spacer {
+        display: none;
+    }
+}
+
+@media (max-width: 580px) {
+
+    .valores-grid,
+    .equipo-grid {
+        grid-template-columns: 1fr;
+    }
+}

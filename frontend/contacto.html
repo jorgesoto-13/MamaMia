@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contacto — Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/contacto.css"/>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html" class="active">Contacto</a></li>
+      <li><a href="Mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'" aria-label="Carrito">
+      <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO CONTACTO -->
+  <section class="con-hero">
+    <div class="con-hero-bg"></div>
+    <div class="con-hero-overlay"></div>
+    <div class="con-hero-content">
+      <p class="con-hero-tag">ESTAMOS AQUÍ PARA TI</p>
+      <h1 class="con-hero-title">Contacto</h1>
+    </div>
+  </section>
+
+  <!-- CUERPO -->
+  <section class="con-body">
+
+    <!-- Info izquierda -->
+    <div class="con-info reveal">
+      <p class="section-label">INFORMACIÓN DE CONTACTO</p>
+      <h2 class="con-title">Visítanos o<br><em>escríbenos</em></h2>
+
+      <div class="info-items">
+        <div class="info-item">
+          <div class="info-icon">📍</div>
+          <div>
+            <p class="info-label">DIRECCIÓN</p>
+            <p class="info-val">Av. Lima Sur 617</p>
+            <p class="info-val">Chosica, Lima, Perú</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">📞</div>
+          <div>
+            <p class="info-label">TELÉFONO</p>
+            <p class="info-val">+51 1 360 7890</p>
+            <p class="info-val">+51 942 957 236 (WhatsApp)</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">✉️</div>
+          <div>
+            <p class="info-label">EMAIL</p>
+            <p class="info-val">hola@pizzeriamamamia.pe</p>
+            <p class="info-val">pedidos@pizzeriamamamia.pe</p>
+          </div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">🕐</div>
+          <div>
+            <p class="info-label">HORARIO</p>
+            <p class="info-val">Lunes a Viernes: 12:00 – 22:00</p>
+            <p class="info-val">Sábado y Domingo: 12:00 – 23:00</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mapa -->
+      <div class="mapa-wrap">
+        <a class="mapa-btn" href="https://www.google.com/maps/place/Av.+Lima+Sur+617,+Lurigancho-Chosica+15468/" target="_blank">Abrir en Maps ↗</a>
+        <iframe
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-76.7200,-11.9400,-76.6900,-11.9200&layer=mapnik&marker=-11.9300,-76.7050"
+          width="100%" height="200"
+          style="border:0;border-radius:12px;margin-top:0.8rem"
+          loading="lazy" title="Ubicación Mama Mia">
+        </iframe>
+      </div>
+    </div>
+
+    <!-- Formulario derecha -->
+    <div class="con-form-wrap reveal delay1">
+      <h3 class="form-title">Envíanos un mensaje</h3>
+
+      <div class="form-row">
+        <div class="field">
+          <label>NOMBRE <span class="req">*</span></label>
+          <input type="text" placeholder="Tu nombre" id="cNombre"/>
+          <span class="field-error" id="cNombreErr"></span>
+        </div>
+        <div class="field">
+          <label>EMAIL <span class="req">*</span></label>
+          <input type="email" placeholder="tu@email.com" id="cEmail"/>
+          <span class="field-error" id="cEmailErr"></span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>TELÉFONO</label>
+        <input type="tel" placeholder="+51 987 000 000" id="cTel"/>
+      </div>
+
+      <div class="field">
+        <label>ASUNTO <span class="req">*</span></label>
+        <select id="cAsunto">
+          <option value="">Selecciona un asunto</option>
+          <option>Consulta general</option>
+          <option>Reserva de mesa</option>
+          <option>Pedido a domicilio</option>
+          <option>Sugerencia o reclamo</option>
+          <option>Trabajo con nosotros</option>
+          <option>Otro</option>
+        </select>
+        <span class="field-error" id="cAsuntoErr"></span>
+      </div>
+
+      <div class="field">
+        <label>MENSAJE <span class="req">*</span> <span class="char-count" id="charCount">(0/500)</span></label>
+        <textarea id="cMensaje" placeholder="Escribe tu mensaje aquí..." rows="5" maxlength="500" oninput="updateChar()"></textarea>
+        <span class="field-error" id="cMensajeErr"></span>
+      </div>
+
+      <button class="btn-enviar" onclick="handleContacto()">✈️ Enviar Mensaje</button>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+    <footer>
+    <div class="footer-container">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src="img/logo.png" alt="Logo"> Mama Mia
+        </div>
+        <p class="footer-desc">Auténtica pizza napolitana en el corazón de Chosica. Masa fermentada 48 horas y horneada a la leña.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <div class="footer-info">
+          <span>📍 Av. Lima Sur 617, Chosica, Lima</span>
+          <span>📞 +51 1 360 7890 | +51 942 957 236</span>
+          <span>✉️ hola@pizzeriamamamia.pe</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Horario</h4>
+        <div class="footer-info">
+          <span>Lunes a Viernes: 12:00 – 22:00</span>
+          <span>Sábado y Domingo: 12:00 – 23:00</span>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2026 Mama Mia. Todos los derechos reservados.</div>
+      <div class="footer-links">
+        <a href="index.html">Inicio</a>
+        <a href="nosotros.html">Nosotros</a>
+        <a href="contacto.html">Contacto</a>
+        <a href="admin.html">Admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/contacto.js"></script>
+</body>
+</html>

@@ -1,0 +1,550 @@
+/* =============================================
+   style.css — Estilos globales Mama Mia
+   Compartido por todas las páginas
+   =============================================
+*/
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --red: #C8372D;
+    --red-hover: #a82c23;
+    --gold: #D4A843;
+    --cream: #F5F0EB;
+    --dark: #1C1008;
+    --gray: #6B6565;
+    --light-gray: #9B9393;
+    --white: #FFFFFF;
+    --card-radius: 16px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--white);
+    color: var(--dark);
+    overflow-x: hidden;
+}
+
+/* ── NAV ── */
+#navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s;
+}
+
+#navbar.scrolled {
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+}
+
+.nav-logo-icon {
+    width: 36px;
+    height: 36px;
+    background: var(--red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+}
+
+.nav-logo-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--dark);
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--gray);
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    transition: color 0.2s, background 0.2s;
+}
+
+.nav-links a:hover {
+    color: var(--dark);
+}
+
+.nav-links a.active {
+    background: #F3E8E7;
+    color: var(--red);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.nav-cart {
+    position: relative;
+    background: #F3E8E7;
+    border: none;
+    cursor: pointer;
+    font-size: 1.05rem;
+    padding: 0.42rem 0.75rem;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--red);
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.nav-cart:hover {
+    background: #FDECEA;
+    transform: scale(1.05);
+}
+
+.nav-cart-badge {
+    background: var(--red);
+    color: #fff;
+    font-size: 0.65rem;
+    font-weight: 700;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0 4px;
+    animation: badgePop 0.3s cubic-bezier(.22, .68, 0, 1.4);
+}
+
+@keyframes badgePop {
+    0% {
+        transform: scale(0);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.nav-signin {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--red);
+    color: #fff;
+    border: none;
+    padding: 0.48rem 1.1rem;
+    border-radius: 50px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.nav-signin:hover {
+    background: var(--red-hover);
+    transform: translateY(-1px);
+}
+
+/* ── BOTONES GLOBALES ── */
+.btn-red {
+    background: var(--red);
+    color: #fff;
+    padding: 0.78rem 1.7rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    box-shadow: 0 6px 20px rgba(200, 55, 45, 0.42);
+    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-red:hover {
+    background: var(--red-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(200, 55, 45, 0.52);
+}
+
+.btn-outline-red {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1.5px solid var(--red);
+    color: var(--red);
+    background: transparent;
+    padding: 0.72rem 1.7rem;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.btn-outline-red:hover {
+    background: var(--red);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.btn-outline-white {
+    background: transparent;
+    color: #fff;
+    padding: 0.78rem 1.7rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    border: 1.5px solid rgba(255, 255, 255, 0.55);
+    transition: background 0.2s, border-color 0.2s;
+}
+
+.btn-outline-white:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── SECCIÓN LABELS ── */
+.section-label {
+    font-size: 0.71rem;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 0.6rem;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.75rem, 2.8vw, 2.5rem);
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.15;
+}
+
+.section-sub {
+    color: var(--gray);
+    font-size: 0.9rem;
+    line-height: 1.75;
+    font-weight: 300;
+    max-width: 540px;
+    margin: 0 auto;
+}
+
+/* ── FOOTER ── */
+footer {
+    background: #1C1008;
+    padding: 3rem 6% 1.5rem;
+    color: rgba(255, 255, 255, 0.82);
+    font-size: 0.88rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer-container {
+    width: 100%;
+    max-width: 1100px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.footer-col {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    color: #D4A843;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.footer-brand img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.footer-desc {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    font-size: 0.9rem;
+}
+
+.footer-col h4 {
+    color: #fff;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+
+.footer-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.9rem;
+}
+
+.footer-bottom {
+    width: 100%;
+    max-width: 1100px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.footer-copy {
+    color: rgba(255, 255, 255, 0.38);
+    font-size: 0.76rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 1.4rem;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.52);
+    text-decoration: none;
+    font-size: 0.8rem;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #fff;
+}
+
+/* ── NAV USER DROPDOWN ── */
+.nav-user {
+    position: relative;
+}
+
+.nav-user-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: #F3E8E7;
+    border: none;
+    cursor: pointer;
+    padding: 0.42rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    color: var(--red);
+    font-family: 'Inter', sans-serif;
+    transition: background 0.2s;
+}
+
+.nav-user-btn:hover {
+    background: #FDECEA;
+}
+
+.nav-user-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--red);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.72rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.nav-user-arrow {
+    font-size: 0.7rem;
+    transition: transform 0.2s;
+}
+
+.nav-user-dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    background: #fff;
+    border-radius: 14px;
+    min-width: 200px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    z-index: 9999;
+    animation: dropIn 0.2s cubic-bezier(.22, .68, 0, 1.2);
+}
+
+@keyframes dropIn {
+    from {
+        opacity: 0;
+        transform: translateY(-8px) scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.dropdown-header {
+    padding: 1rem 1.1rem 0.8rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    background: #FAFAFA;
+}
+
+.dropdown-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+.dropdown-email {
+    font-size: 0.75rem;
+    color: var(--light-gray);
+    margin-top: 0.15rem;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1.1rem;
+    font-size: 0.84rem;
+    color: var(--dark);
+    text-decoration: none;
+    transition: background 0.15s;
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+}
+
+.dropdown-item:hover {
+    background: #F5F0EB;
+}
+
+.dropdown-item.logout {
+    color: var(--red);
+}
+
+.dropdown-item.logout:hover {
+    background: #FEF2F2;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: rgba(0, 0, 0, 0.06);
+    margin: 0.3rem 0;
+}
+
+.nav-user-dropdown {
+    pointer-events: auto;
+}
+
+.nav-user-dropdown.hidden {
+    display: none !important;
+    pointer-events: none;
+}
+
+body.dropdown-open {
+    overflow: hidden;
+}
+
+/* ── ANIMACIONES GLOBALES ── */
+@keyframes fadeUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes scrollBounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(7px);
+    }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 580px) {
+    footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

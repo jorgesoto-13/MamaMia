@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ajustes — Mama Mia Pizzería</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <link rel="stylesheet" href="css/perfil.css"/>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a class="nav-logo" href="index.html">
+      <img src="img/logo.png" alt="Logo" class="nav-logo-icon" style="background:none; padding:0; object-fit:cover;"/>
+      <span class="nav-logo-text">Mama Mia</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="menu.html">Menú</a></li>
+      <li><a href="nosotros.html">Nosotros</a></li>
+      <li><a href="contacto.html">Contacto</a></li>
+      <li><a href="mipedido.html">Mi Pedido</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="nav-cart" onclick="location.href='carrito.html'">
+        <span style="font-size:1.1rem; display:inline-block; margin-right:4px;">🛍️</span> <span class="nav-cart-badge" id="navCartBadge"></span>
+      </button>
+      <a href="login.html" class="nav-signin">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Iniciar sesión
+      </a>
+    </div>
+  </nav>
+
+  <main class="perfil-main">
+
+    <aside class="perfil-sidebar">
+      <div class="perfil-avatar-wrap">
+        <div class="perfil-avatar" id="perfilAvatar">?</div>
+      </div>
+      <p class="perfil-nombre" id="perfilNombre">—</p>
+      <p class="perfil-email" id="perfilEmail">—</p>
+      <nav class="perfil-nav">
+        <a href="perfil.html" class="perfil-nav-item">👤 Mi perfil</a>
+        <a href="mipedido.html" class="perfil-nav-item">📦 Mis pedidos</a>
+        <a href="ajustes.html" class="perfil-nav-item active">⚙️ Ajustes</a>
+      </nav>
+    </aside>
+
+    <div class="perfil-content">
+
+      <!-- Notificaciones -->
+      <div class="perfil-card" style="margin-bottom:1.2rem">
+        <div class="perfil-card-header">
+          <h2>🔔 Notificaciones</h2>
+          <p>Controla qué notificaciones deseas recibir</p>
+        </div>
+        <div class="ajuste-list">
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Estado del pedido</p>
+              <p class="ajuste-desc">Recibe actualizaciones cuando tu pedido cambia de estado</p>
+            </div>
+            <div class="toggle active" id="togPedido" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Promociones y ofertas</p>
+              <p class="ajuste-desc">Entérate de descuentos y pizzas especiales de temporada</p>
+            </div>
+            <div class="toggle active" id="togPromo" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Recordatorios</p>
+              <p class="ajuste-desc">Recuerda completar pedidos que dejaste en el carrito</p>
+            </div>
+            <div class="toggle" id="togRecord" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Apariencia -->
+      <div class="perfil-card" style="margin-bottom:1.2rem">
+        <div class="perfil-card-header">
+          <h2>🎨 Apariencia</h2>
+          <p>Personaliza cómo se ve la aplicación</p>
+        </div>
+        <div class="ajuste-list">
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Modo oscuro</p>
+              <p class="ajuste-desc">Cambia el tema de la interfaz a colores oscuros</p>
+            </div>
+            <div class="toggle" id="togOscuro" onclick="toggleDarkMode()"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Privacidad -->
+      <div class="perfil-card" style="margin-bottom:1.2rem">
+        <div class="perfil-card-header">
+          <h2>🔒 Privacidad</h2>
+          <p>Controla el uso de tus datos</p>
+        </div>
+        <div class="ajuste-list">
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Compartir datos de uso</p>
+              <p class="ajuste-desc">Ayúdanos a mejorar la app compartiendo estadísticas anónimas</p>
+            </div>
+            <div class="toggle active" id="togDatos" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="ajuste-item">
+            <div>
+              <p class="ajuste-title">Historial de pedidos visible</p>
+              <p class="ajuste-desc">Muestra tu historial en tu perfil público</p>
+            </div>
+            <div class="toggle" id="togHistorial" onclick="this.classList.toggle('active')"><div class="toggle-knob"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Zona de peligro -->
+      <div class="perfil-card danger-card">
+        <div class="perfil-card-header">
+          <h2>⚠️ Zona de peligro</h2>
+          <p>Estas acciones son irreversibles</p>
+        </div>
+        <div class="danger-actions">
+          <div class="danger-item">
+            <div>
+              <p class="ajuste-title">Cerrar sesión en todos los dispositivos</p>
+              <p class="ajuste-desc">Cierra sesión en todos los dispositivos donde estás conectado</p>
+            </div>
+            <button class="btn-danger-outline" onclick="cerrarTodo()">Cerrar todo</button>
+          </div>
+          <div class="danger-item">
+            <div>
+              <p class="ajuste-title" style="color:var(--red)">Eliminar cuenta</p>
+              <p class="ajuste-desc">Elimina permanentemente tu cuenta y todos tus datos</p>
+            </div>
+            <button class="btn-danger" onclick="eliminarCuenta()">Eliminar cuenta</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="btn-guardar" style="margin-top:1.2rem" onclick="guardarAjustes()">💾 Guardar ajustes</button>
+    </div>
+  </main>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/main.js"></script>
+  <script src="js/ajustes.js"></script>
+</body>
+</html>
