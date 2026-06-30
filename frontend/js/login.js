@@ -121,25 +121,38 @@ function handleLogin() {
     const btn = document.querySelector('#formLogin .btn-submit');
     btn.dataset.label = btn.textContent;
     btn.classList.add('loading');
-    btn.textContent = '';
+    btn.textContent = 'Cargando...';
 
-    setTimeout(() => {
-        btn.classList.remove('loading');
-        btn.textContent = btn.dataset.label;
-
-        // Redirigir admin si corresponde
-        if (email === 'admin@mamamia.com') {
-            showToast('✅ Acceso admin detectado, redirigiendo...');
-            setTimeout(() => location.href = 'admin.html', 1200);
-        } else {
-            // Guardar sesión simulada
-            const usuario = { nombre: email.split('@')[0], email };
-            localStorage.setItem('mamamia_usuario', JSON.stringify(usuario));
-
-            showToast('✅ ¡Bienvenido de vuelta!');
-            setTimeout(() => location.href = 'index.html', 1200);
-        }
-    }, 1400);
+    // Petición a Spring Boot
+    fetch('http://localhost:8080/api/usuarios/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ correo: email, password: pass })
+    })
+        .then(response => {
+            btn.classList.remove('loading');
+            btn.textContent = btn.dataset.label;
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error("Credenciales incorrectas");
+            }
+        })
+        .then(usuario => {
+            if (usuario.rol === 'ADMIN') {
+                showToast('Acceso admin detectado');
+                setTimeout(() => location.href = 'admin.html', 1200);
+            } else {
+                const dataStorage = { nombre: usuario.nombre, email: usuario.correo };
+                localStorage.setItem('mamamia_usuario', JSON.stringify(dataStorage));
+                showToast('¡Bienvenido ' + usuario.nombre + '!');
+                setTimeout(() => location.href = 'index.html', 1200);
+            }
+        })
+        .catch(error => {
+            showError('loginPassErr', error.message);
+            showToast('Error de inicio de sesión', 'error');
+        });
 }
 
 // ── HANDLE REGISTRO ──
