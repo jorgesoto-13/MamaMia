@@ -1,0 +1,62 @@
+# Docker – Pizzeria MamaMia
+
+## Cómo levantar todo
+
+```bash
+docker compose up --build
+```
+
+Esto levanta 3 contenedores:
+
+| Servicio   | Descripción                          | Puerto local |
+|------------|---------------------------------------|--------------|
+| `db`       | MySQL 8.4                            | 3306         |
+| `backend`  | API Spring Boot (Java 21)            | 8080         |
+| `frontend` | HTML/CSS/JS servido con Nginx        | 8081         |
+
+- Backend: http://localhost:8080
+- Frontend: http://localhost:8081
+
+Para bajar todo:
+
+```bash
+docker compose down
+```
+
+Para borrar también los datos de la base de datos:
+
+```bash
+docker compose down -v
+```
+
+## Importante: revisa tu `application.properties`
+
+Spring Boot lee variables de entorno automáticamente (mapea
+`SPRING_DATASOURCE_URL` → `spring.datasource.url`, etc.), así que **no
+necesitas tocar tu `application.properties`** siempre que uses las
+propiedades estándar:
+
+```properties
+spring.datasource.url=${SPRING_DATASOURCE_URL}
+spring.datasource.username=${SPRING_DATASOURCE_USERNAME}
+spring.datasource.password=${SPRING_DATASOURCE_PASSWORD}
+```
+
+Si en tu `application.properties` tienes credenciales de MySQL "hardcodeadas"
+(usuario/contraseña fijos), reemplázalas por lo de arriba para que use las
+que vienen del `docker-compose.yml`. Si ya usas variables de entorno, no
+tienes que cambiar nada.
+
+## Para el punto 15 de tu diapositiva
+
+- ✅ **Despliegue en la nube**: la imagen del backend generada con este
+  Dockerfile es la misma que subirías a Railway/Render/Fly.io — solo
+  necesitas apuntar `SPRING_DATASOURCE_URL` a la base de datos en la nube.
+- ✅ **Uso de contenedores (Docker)**: Dockerfile multi-stage (build con
+  Maven + imagen final liviana con solo el JRE) y `docker-compose.yml`
+  orquestando backend + base de datos + frontend.
+- ✅ **Escalabilidad y portabilidad**: al estar “containerizado”, el mismo
+  Dockerfile corre igual en tu laptop, en la de tus compañeros, o en
+  cualquier proveedor cloud que soporte contenedores, y puedes escalar el
+  backend con `docker compose up --scale backend=3` (necesitarías un
+  balanceador delante, pero la base ya está lista).
